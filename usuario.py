@@ -1,8 +1,10 @@
 class Usuario():
 
     def __init__(self, nome_de_usuario:str, senha, biografia:str="Sem biografia ainda") -> None:
+        
         self.__nome_de_usuario = None
         self.__senha = senha
+        
         if isinstance(nome_de_usuario,str):
             self.__nome_de_usuario = nome_de_usuario
         else:
@@ -11,6 +13,8 @@ class Usuario():
         self.__biografia = None
         if isinstance(biografia, str):
             self.__biografia = biografia
+            
+            
 
     def AlterarSenha(self,nova_senha):
         self.__senha = nova_senha

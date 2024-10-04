@@ -1,10 +1,12 @@
 from usuario import Usuario
 from jogo import Jogo
 class Jogador(Usuario):
-    def __init__(self, nome_de_usuario: str, senha, genero:str, idade:int, biografia:str="Sem biografia ainda") -> None:
+    def __init__(self,nome_de_usuario: str, senha, genero:str, idade:int, biografia:str="Sem biografia ainda") -> None:
         super().__init__(nome_de_usuario, senha, biografia)
         self.__genero = None
         self.__idade = None
+        self.__biblioteca_jogador = []
+
         if isinstance(genero, str):
             self.__genero = genero
         else:
@@ -14,7 +16,7 @@ class Jogador(Usuario):
             self.__idade = idade
         else:
             return "Idade incorreta. Precisa ser um número inteiro"
-        self.__biblioteca_jogador = []
+        
 
     def adquirir_jogo(self, jogo):
         if isinstance(jogo, Jogo):
