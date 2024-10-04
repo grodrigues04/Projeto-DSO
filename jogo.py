@@ -39,7 +39,7 @@ class Jogo():
         @autor.setter
         def autor(self,autor):
             if isinstance(autor,str):
-                self.__autor = ator
+                self.__autor = autor
                 return "Seu autor foi alterado!"
             else:
                 return "Autor incorreto."

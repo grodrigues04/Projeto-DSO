@@ -1,1 +1,3 @@
-from jogo import Jogo
+class Catalogo():
+    pass
+    
