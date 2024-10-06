@@ -12,10 +12,5 @@ class Catalogo():
     def jogos_disponiveis(self):
         return self.__jogos_disponiveis
 
-    @jogos_disponiveis.setter
-    def jogos_disponiveis(self, Jogo):
-        guardar_jogo = [Jogo]
-        self.__jogos_disponiveis.append(Jogo)
-        return "Jogo adicionado com sucesso ao catalogo!"
 
     
