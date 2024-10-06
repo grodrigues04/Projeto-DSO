@@ -1,13 +1,6 @@
-from desenvolvedor import Desenvolvedor
-from jogador import Jogador
-from usuario import Usuario
-
-
 class Jogo():
     #inicializadores
-    def __init__(self, nome_de_usuario:str, titulo:str, autor:str, genero:str, biografia_jogo:str= "Sem biografia ainda", JogadoresAtivos:list=[]) -> None:
-        #herda o nome de usuario dos jogadores e dos devs
-        super().__init__(nome_de_usuario)
+    def __init__(self, titulo:str, autor:str, genero:str, biografia_jogo:str= "Sem biografia ainda", JogadoresAtivos:list=[]) -> None:
         
         #inicializa os atributos
         self.__autor = None

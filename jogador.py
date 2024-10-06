@@ -1,5 +1,4 @@
 from usuario import Usuario
-from jogo import Jogo
 class Jogador(Usuario):
     def __init__(self,nome_de_usuario: str, senha, genero:str, idade:int, biografia:str="Sem biografia ainda") -> None:
         super().__init__(nome_de_usuario, senha, biografia)

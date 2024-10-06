@@ -1,5 +1,4 @@
 from usuario import Usuario
-from devcatalogo import DevCatalogo
 from catalogo import Catalogo
 from jogo import Jogo
 
