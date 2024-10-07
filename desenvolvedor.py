@@ -37,7 +37,7 @@ class Desenvolvedor():
             return "Insira um email válido."
     
     def checar_termos(self, termos_condicoes):
-        if termos_condicoes == True:
+        if termos_condicoes:
             return "Termos e condições aceitados com sucesso!"
         else:
             return "Termos e condições não foram concordados."
