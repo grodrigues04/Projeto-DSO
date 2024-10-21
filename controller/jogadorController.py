@@ -1,0 +1,2 @@
+class JogadorController():
+    pass

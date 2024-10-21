@@ -1,6 +1,6 @@
-from usuario import Usuario
-from jogador import Jogador
-from jogo import Jogo
-from catalogo import Catalogo
-from desenvolvedor import Desenvolvedor
+from model.usuario import Usuario
+from model.jogador import Jogador
+from model.jogo import Jogo
+from model.catalogo import Catalogo
+from model.desenvolvedor import Desenvolvedor
 jogo1 = Jogo("joao", "AO2", "dev32", "fps", "a")
