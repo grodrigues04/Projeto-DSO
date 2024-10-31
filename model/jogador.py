@@ -17,20 +17,19 @@ class Jogador(Usuario):
         if isinstance(idade, int):
             self.__idade = idade
         else:
-            return "Idade incorreta. Precisa ser um número inteiro"
+            return False
         
-
     def adquirir_jogo(self, jogo):
         if isinstance(jogo, Jogo):
             self.__biblioteca_jogador.append(jogo)
         else:
-            return "Adicionar o jogo na bibliteca falhou"
+            return False
         
     def excluir_jogo(self,jogo):
         if isinstance(jogo, Jogo) and Jogo in self.__biblioteca_jogador:
             self.__biblioteca_jogador.remove(jogo)
         else:
-            return "Retirar o jogo da biblitoeca falhou"
+            return False
         
     def lista_de_jogos():
         pass
