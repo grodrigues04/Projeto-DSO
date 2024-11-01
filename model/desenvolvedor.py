@@ -2,27 +2,23 @@ from model.usuario import Usuario
 from model.catalogo import Catalogo
 from model.jogo import Jogo
 
-class Desenvolvedor():
-    def __init__(self, jogo:Jogo, titulo:str,  nome_de_usuario: str, senha:str, email:str, idade:int, termos_condicoes:bool, jogos_disponiveis:list, biografia:str="Sem biografia ainda") -> None:
-        super().__init__(nome_de_usuario, senha, biografia, jogos_disponiveis, titulo)
+class Desenvolvedor(Usuario):
+    def __init__(self, nome_de_usuario: str, senha:str, email:str, termos_condicoes:bool, biografia:str="Sem biografia ainda") -> None:
+        super().__init__(nome_de_usuario, senha, biografia)
         self.__email = None
         self.__termos_condicoes = None
         self.__jogo = None
 
-        if isinstance(jogo, Jogo):
-            self.__jogo = Jogo
-        else:
-            return "Jogo Incorreto"
 
         if isinstance(email, str):
             self.__email = email
         else:
-            return "Email incorreto"
+            return False
         
-        if isinstance(termos_condicoes, bool):
+        if isinstance(termos_condicoes, str):
             self.__termos_condicoes = termos_condicoes
         else:
-            return "Termos e condições incorreto."
+            return False
 
     @property  
     def email(self):
