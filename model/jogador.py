@@ -3,7 +3,7 @@ from model.catalogo import Catalogo
 from model.jogo import Jogo
 
 class Jogador(Usuario):
-    def __init__(self, jogo:Jogo, nome_de_usuario: str, senha, genero:str, idade:int, biografia:str="Sem biografia ainda") -> None:
+    def __init__(self, nome_de_usuario: str, senha:str, genero:str, idade:int, biografia:str="Sem biografia ainda") -> None:
         super().__init__(nome_de_usuario, senha, biografia)
         self.__genero = None
         self.__idade = None
