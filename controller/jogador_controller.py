@@ -4,8 +4,8 @@ class JogadorController():
         self.__controlador_sistema = controlador_sistema
 
     @property
-    def jogadores(self):
+    def users(self):
         return self.__jogadores
     
-    def adicionar_jogador(self, jogador):
+    def adicionar_user(self, jogador):
         self.__jogadores.append(jogador)

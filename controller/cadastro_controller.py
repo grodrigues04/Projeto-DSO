@@ -13,7 +13,7 @@ class ControllerCadastro():
 
         if usuario_info["tipo_de_conta"] == "jogador":
             jogador_control = self.__controlador_sistema.jogador_controler
-            lista_jogadores = jogador_control.jogadores
+            lista_jogadores = jogador_control.users
             jogador_existe = any(jogador.nome_de_usuario == usuario_info["nome_de_usuario"] for jogador in lista_jogadores)
             if not jogador_existe:
                 novo_jogador = Jogador(
@@ -24,7 +24,7 @@ class ControllerCadastro():
                     usuario_info["idade"],
                     usuario_info["biografia"]
                 )
-                jogador_control.adicionar_jogador(novo_jogador)
+                jogador_control.adicionar_user(novo_jogador)
             else:
                 return False
 
@@ -32,7 +32,7 @@ class ControllerCadastro():
         elif usuario_info["tipo_de_conta"] == "desenvolvedor":
             print("Entrei aqui, tipo desenvolvedor!")
             dev_control = self.__controlador_sistema.desenvolvedor_controler
-            lista_devs = dev_control.devs
+            lista_devs = dev_control.users
             dev_existe = any(dev.nome_de_usuario == usuario_info["nome_de_usuario"] for dev in lista_devs)
             if not dev_existe:
                 novo_dev = Desenvolvedor(
@@ -43,7 +43,7 @@ class ControllerCadastro():
                     usuario_info["termos"],
                     usuario_info["biografia"]
                 )
-                dev_control.adicionar_dev(novo_dev)
+                dev_control.adicionar_user(novo_dev)
                 print("Novo desenvolvedor adicionado:", usuario_info["nome_de_usuario"])
             else:
                 return False
