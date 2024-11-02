@@ -1,24 +1,56 @@
 from model.jogador import Jogador
 from model.desenvolvedor import Desenvolvedor
+from view.tela_cadastro import TelaCadastro
 
-class Login():
-    def verificar_credenciais(self) -> bool:
-        pass
+class ControllerCadastro():
+    def __init__(self, controlador_sistema) -> None:
+        self.__tela_cadastro = TelaCadastro()
+        self.__controlador_sistema = controlador_sistema
 
-class Cadastro():
-    def __init__(self) -> None:
-        self.__desenvolvedores = []
-        self.__jogadores = []
-    def cadastrar_usuario(self, tipo_usuario, usuario_info):
-        if tipo_usuario == "jogador":
-            novo_jogador = Jogador(usuario_info["nome_de_usuario"], usuario_info["senha"], usuario_info["genero"], usuario_info["idade"], usuario_info["biografia"] )
-            self.__desenvolvedores.append(novo_jogador)
-        elif tipo_usuario == "desenvolvedor":
-            novo_dev = Desenvolvedor(usuario_info["nome_de_usuario"], usuario_info["senha"],usuario_info["email"], usuario_info["termos"], usuario_info["biografia"])
-            self.__desenvolvedores.append(novo_dev)
+    def cadastrar_usuario(self):
+        tipos_de_usuario, saudacao = self.__tela_cadastro.tipo_de_cadastro()
+        usuario_info = self.__tela_cadastro.cadastroGeral(tipos_de_usuario, saudacao)
+
+        if usuario_info["tipo_de_conta"] == "jogador":
+            jogador_control = self.__controlador_sistema.jogador_controler
+            lista_jogadores = jogador_control.jogadores
+            jogador_existe = any(jogador.nome_de_usuario == usuario_info["nome_de_usuario"] for jogador in lista_jogadores)
+            if not jogador_existe:
+                novo_jogador = Jogador(
+                    usuario_info["tipo_de_conta"],
+                    usuario_info["nome_de_usuario"],
+                    usuario_info["senha"],
+                    usuario_info["genero"],
+                    usuario_info["idade"],
+                    usuario_info["biografia"]
+                )
+                jogador_control.adicionar_jogador(novo_jogador)
+            else:
+                return False
+
+
+        elif usuario_info["tipo_de_conta"] == "desenvolvedor":
+            print("Entrei aqui, tipo desenvolvedor!")
+            dev_control = self.__controlador_sistema.desenvolvedor_controler
+            lista_devs = dev_control.devs
+            dev_existe = any(dev.nome_de_usuario == usuario_info["nome_de_usuario"] for dev in lista_devs)
+            if not dev_existe:
+                novo_dev = Desenvolvedor(
+                    usuario_info["tipo_de_conta"],
+                    usuario_info["nome_de_usuario"],
+                    usuario_info["senha"],
+                    usuario_info["email"],
+                    usuario_info["termos"],
+                    usuario_info["biografia"]
+                )
+                dev_control.adicionar_dev(novo_dev)
+                print("Novo desenvolvedor adicionado:", usuario_info["nome_de_usuario"])
+            else:
+                return False
         else:
             print("Tipo de usuário inválido.")
-            return None    
-        print(f"lista dev: {self.__desenvolvedores} lista jog: {self.__jogadores}")
+            return None
+            
+        return True
 
     #@função_para_tela_De_acordo_com_o_usuario
