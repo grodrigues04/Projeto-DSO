@@ -1,6 +1,6 @@
 class Usuario():
 
-    def __init__(self, nome_de_usuario:str, senha, biografia:str="Sem biografia ainda") -> None:
+    def __init__(self,tipo_de_usuario, nome_de_usuario:str, senha, biografia:str="Sem biografia ainda") -> None:
         
         self.__nome_de_usuario = None
         self.__senha = senha
