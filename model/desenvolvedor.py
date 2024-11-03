@@ -7,8 +7,7 @@ class Desenvolvedor(Usuario):
         super().__init__(tipo_de_usuario, nome_de_usuario, senha, biografia)
         self.__email = None
         self.__termos_condicoes = None
-        self.__jogo = None
-
+        self.__jogos_criados = []
 
         if isinstance(email, str):
             self.__email = email
@@ -51,6 +50,10 @@ class Desenvolvedor(Usuario):
         self.__jogos_disponiveis.append(jogo_adicionar)
         return "Seu jogo foi compartilhado com sucesso!"
     
+    @property
+    def jogos_criados(self):
+        return self.__jogos_criados
+
     def excluir_jogo(self, titulo):
         for jogo_atual in self.__jogos_disponiveis:
             if jogo_atual[0] == titulo:
