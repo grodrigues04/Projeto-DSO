@@ -26,8 +26,6 @@ class ControladorSistema():
     def login_controller(self):
         return self.__login_controller
 
-
-
     @property
     def desenvolvedor_controler(self):
         return self.__desenvolvedor_controller
@@ -38,3 +36,4 @@ class ControladorSistema():
 
     def cadastra_usuario(self):
         self.__cadastro_controller.cadastrar_usuario()
+        self.__login_controller.iniciar_login()

@@ -33,6 +33,17 @@ class Usuario():
             return "Nome de usuario incorreto."
         
     @property
+    def senha(self):
+        return self.__senha
+
+    @senha.setter
+    def senha(self, nova_senha):
+        self.__senha = nova_senha
+
+    def fazer_login(self):
+        return {"usuario":self.__nome_de_usuario, "senha":self.__senha}
+        
+    @property
     def biografia(self):
         return self.__biografia
 
