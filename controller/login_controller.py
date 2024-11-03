@@ -31,7 +31,8 @@ class ControllerLogin():
     def iniciar_login(self):
         usuario_credenciais = self.__tela_login.forms_login()
         status = self.verificar_credenciais(usuario_credenciais)
-        while isinstance(status,str):
+        while isinstance(status,str): #TODO: ESSE ISISTANCE AQUI TA HORRIVEL
             self.__tela_login.mensagem(status)
             usuario_credenciais = self.__tela_login.forms_login()
         #INICIAR SISTEMA GLORIAAAAAAAAAAA
+        return usuario_credenciais["tipo_de_conta"]
