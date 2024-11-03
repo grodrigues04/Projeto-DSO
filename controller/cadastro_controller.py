@@ -25,6 +25,7 @@ class ControllerCadastro():
                     usuario_info["biografia"]
                 )
                 jogador_control.adicionar_user(novo_jogador)
+                return novo_jogador
             else:
                 return False
 
@@ -44,13 +45,11 @@ class ControllerCadastro():
                     usuario_info["biografia"]
                 )
                 dev_control.adicionar_user(novo_dev)
-                print("Novo desenvolvedor adicionado:", usuario_info["nome_de_usuario"])
+                return novo_dev
             else:
                 return False
         else:
             print("Tipo de usuário inválido.")
             return None
-            
-        return True
 
     #@função_para_tela_De_acordo_com_o_usuario

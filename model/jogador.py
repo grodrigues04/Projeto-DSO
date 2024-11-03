@@ -31,5 +31,5 @@ class Jogador(Usuario):
         else:
             return False
         
-    def lista_de_jogos():
-        pass
+    def lista_de_jogos(self):
+        return self.__biblioteca_jogador
