@@ -3,7 +3,7 @@ class TelaJogo():
     def __init__(self) -> None:
         pass
 
-    def criar_jogo(self, dev):
+    def criar_jogo(self):
         print()
         print(" --- Criando seu jogo --- ")
         titulo = input("Digite o titulo do jogo: ")
@@ -13,7 +13,6 @@ class TelaJogo():
         armazenamento = input("Espaço de armazenamento necessario: ")
         print()
         return {"titulo":titulo,
-                "autor":dev.nome_de_usuario,
                 "genero":genero,
                 "descricao":descricao,
                 "idade_minima":idade,

@@ -23,7 +23,8 @@ class JogoControler():
 
     def tela_de_criacao(self):
         dev_atual = self.__controlador_sistema.sessao_atual
-        jogo_infos = self.__tela_jogo.criar_jogo(dev_atual)
+        jogo_infos = self.__tela_jogo.criar_jogo()
+        jogo_infos["autor"] = dev_atual.nome_de_usuario
         self.adicionar_jogo(jogo_infos)
 
     @property
