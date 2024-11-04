@@ -18,7 +18,7 @@ class ControllerLogin():
                 login_credenciais = usuario.fazer_login() 
                 senha_bd = login_credenciais["senha"]
                 if senha_bd == credenciais["senha"]:
-                    return True, "Login bem sucedido. Entrando no sistema..."
+                    return True, usuario, "Login bem sucedido. Entrando no sistema..."
                 else:
                     return False,"Senha errada, tente novamente."
                 
@@ -27,8 +27,9 @@ class ControllerLogin():
     def iniciar_login(self):
         while True: #TODO: ESSE ISISTANCE AQUI TA HORRIVEL
             usuario_credenciais = self.__tela_login.forms_login()
-            status,mensagem = self.verificar_credenciais(usuario_credenciais)
-
+            status, usuario, mensagem = self.verificar_credenciais(usuario_credenciais)
+            print("print do usuario que ta chegando:",usuario)
+            self.__controlador_sistema.sessao_atual = usuario
             self.__tela_login.mensagem(mensagem)
-            if status: #atestado de calouro
+            if status:
                 return usuario_credenciais["tipo_de_conta"]

@@ -1,8 +1,10 @@
 from view.tela_jogador import TelaJogador
-class JogadorController():
+from .usuario_controller import UsuarioController
+class JogadorController(UsuarioController): #TEM QUE TIRAR O SELF DO CONTROLADOR DO SISTEMA QUANDO INSTANCIA O JOGADOR CONTROLER
     def __init__(self, controlador_sistema) -> None:
+        super().__init__(controlador_sistema)
         self.__jogadores = []
-        self.__controlador_sistema = controlador_sistema
+        #self.__controlador_sistema = controlador_sistema
         self.__tela_jogador = TelaJogador()
 
     @property
@@ -12,8 +14,10 @@ class JogadorController():
     def adicionar_user(self, jogador):
         self.__jogadores.append(jogador)
 
-    def comprar_jogo(self):
+    def perfil(self):
+        self.__tela_jogador.alterar_perfil()
 
+    def comprar_jogo(self):
         jogos_controler = self.__controlador_sistema.jogo_controler
         print(jogos_controler)
         repositorio = jogos_controler.repositorio_de_jogos
@@ -29,6 +33,7 @@ class JogadorController():
                 jogador_objeto.adicionar_jogador(jogador_objeto)
             else:
                 return False, "Idade minima insuficiente"
+
         else:
             return False, "Sua biografia precisa de mais de 10 caracteres para poder adquirir um jogo"
 
@@ -40,7 +45,8 @@ class JogadorController():
     def iniciar_tela(self):
         acoes = {
             1:self.comprar_jogo,
-            2:self.biblioteca_do_jogador
+            2:self.biblioteca_do_jogador,
+            3:self.abrir_tela_de_perfil,
         }
         opcao = self.__tela_jogador.tela_opcoes()
         funcao = acoes[opcao]

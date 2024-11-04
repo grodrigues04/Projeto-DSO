@@ -4,6 +4,7 @@ class Usuario():
         
         self.__nome_de_usuario = None
         self.__senha = senha
+        self.__tipo_de_usuario = None
         
         if isinstance(nome_de_usuario,str):
             self.__nome_de_usuario = nome_de_usuario
@@ -13,13 +14,19 @@ class Usuario():
         self.__biografia = None
         if isinstance(biografia, str):
             self.__biografia = biografia
-            
+        
+        if isinstance(tipo_de_usuario,str):
+            self.__tipo_de_usuario = tipo_de_usuario
             
 
     def AlterarSenha(self,nova_senha):
         self.__senha = nova_senha
         return "Senha alterada com sucesso!"
     
+    @property
+    def tipo_de_usuario(self):
+        return self.__tipo_de_usuario
+
     @property
     def nome_de_usuario(self):
         return self.__nome_de_usuario
