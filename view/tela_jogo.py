@@ -24,10 +24,15 @@ class TelaJogo():
         print()
         if len(repositorio) > 0:
             for jogo in repositorio:
-                print(jogo.titulo)
-                print(jogo.biografia_jogo)
-                print(jogo.armazenamento)
-                print(" ------------- ")
+                print()
+                print(" ------------------------")
+                print(f" - -- {jogo.titulo} -- - ")
+                print(f"Autor: {jogo.autor}")
+                print(f"Genero: {jogo.genero}")
+                print(f"Descricao do jogo: {jogo.biografia_jogo}")
+                print(f"Idade minima para jogar: {jogo.idade_minima}")
+                print(f"Espaço de disco necessário: {jogo.armazenamento}")
+                print(" ------------------------")
                 print()
         else:
             print("Não há jogos disponiveis no momento. Tente mais tarde")

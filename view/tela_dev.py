@@ -5,10 +5,11 @@ class TelaDesenvolvedor():
     def tela_opcoes(self):
         print()
         print("--- DESENVOLVEDOR ---")
+        print("0 - Ver perfil")
         print("1 - Criar jogo")
         print("2 - Lista de jogos desenvolvidos")
         print("3 - Editar Perfil")
-        print("4 - Sair")
+        print("4 - Encerrar Sistema")
         print()
         #opcao = self.le_num_inteiro("Escolha a opcao: ", [1,2,3,4,0])
         opcao = int(input())
@@ -22,9 +23,11 @@ class TelaDesenvolvedor():
             for jogo in jogos:
                 print()
                 print(" ------------------------")
-                print(f"{c} - -- {jogo.titulo}  --")
-                print(f"Autor: {jogo.autor}")
+                print(f" - -- {jogo.titulo} -- - ")
                 print(f"Genero: {jogo.genero}")
+                print(f"Descricao do jogo: {jogo.biografia_jogo}")
+                print(f"Idade minima para jogar: {jogo.idade_minima}")
+                print(f"Espaço de disco necessário: {jogo.armazenamento}")
                 print(" ------------------------")
                 print()
                 c+=1
