@@ -9,7 +9,7 @@ class TelaDesenvolvedor():
         print("2 - Lista de jogos desenvolvidos")
         print("3 - Editar Perfil")
         print("4 - Sair")
-
+        print()
         #opcao = self.le_num_inteiro("Escolha a opcao: ", [1,2,3,4,0])
         opcao = int(input())
         return opcao
@@ -18,12 +18,15 @@ class TelaDesenvolvedor():
         print()
         if len(jogos) > 0:
             print("Aqui está a lista de jogos que você criou")
-            c = 0
+            c = 1
             for jogo in jogos:
-                print(jogo)
+                print()
+                print(" ------------------------")
                 print(f"{c} - -- {jogo.titulo}  --")
                 print(f"Autor: {jogo.autor}")
                 print(f"Genero: {jogo.genero}")
+                print(" ------------------------")
+                print()
                 c+=1
         else:
             print("Você ainda não criou nenhum jogo")
