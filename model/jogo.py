@@ -1,6 +1,6 @@
 class Jogo():
     #inicializadores
-    def __init__(self, titulo:str, autor:str, genero:str,armazenamento:str, biografia_jogo:str) -> None:
+    def __init__(self, titulo:str, autor:object, genero:str,armazenamento:str, biografia_jogo:str) -> None:
         #inicializa os atributos
         self.__armazenamento = armazenamento
         self.__autor = None
@@ -10,7 +10,7 @@ class Jogo():
         self.__JogadoresAtivos = []
         
         #instancializa e verifica os tipos dos atributos que foram inicializados acima
-        if isinstance(autor, str):
+        if isinstance(autor, object):
             self.__autor = autor
             
         if isinstance(genero, str):
