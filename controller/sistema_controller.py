@@ -3,6 +3,7 @@ from .cadastro_controller import ControllerCadastro
 from .login_controller import ControllerLogin
 from .desenvolvedor_controller import DesenvolvedorController
 from .jogador_controller import JogadorController
+from .jogo_controller import JogoControler
 
 class ControladorSistema():
     def __init__(self) -> None:
@@ -12,10 +13,16 @@ class ControladorSistema():
         self.__login_controller = ControllerLogin(self)
         self.__desenvolvedor_controller = DesenvolvedorController(self)
         self.__jogador_controller = JogadorController(self)
+        self.__jogo_controller = JogoControler(self)
+
     @property
     def cadastro_controler(self):
         return self.__cadastro_controller
     
+
+    @property
+    def jogo_controler(self):
+        return self.__jogo_controller
 
     #def abre_tela_inicial(self):
     def realizar_login(self):
@@ -25,7 +32,7 @@ class ControladorSistema():
         pass
 
     @property
-    def sessao_atual(self):
+    def sessao_atual(self): #pega a conta atual que esta usando o sistema. Mais especificamente o objeto.
         return self.__sessao_atual
 
     @property
@@ -52,7 +59,6 @@ class ControladorSistema():
 
     def cadastra_usuario(self):
         self.__sessao_atual = self.__cadastro_controller.cadastrar_usuario()
-        print("sessao atual:", self.__sessao_atual.lista_de_jogos())
         tipo_de_conta = self.__login_controller.iniciar_login()
         self.inicializa_sistema(tipo_de_conta)
 

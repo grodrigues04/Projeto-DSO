@@ -5,7 +5,7 @@ class TelaDesenvolvedor():
     def tela_opcoes(self):
         print()
         print("--- DESENVOLVEDOR ---")
-        print("1 - Compartilhar jogo")
+        print("1 - Criar jogo")
         print("2 - Lista de jogos desenvolvidos")
         print("3 - Editar Perfil")
         print("4 - Sair")
@@ -18,7 +18,12 @@ class TelaDesenvolvedor():
         print()
         if len(jogos) > 0:
             print("Aqui está a lista de jogos que você criou")
-            for jogo,c in jogos:
-                print(f"{c - jogo}")
+            c = 0
+            for jogo in jogos:
+                print(jogo)
+                print(f"{c} - -- {jogo.titulo}  --")
+                print(f"Autor: {jogo.autor}")
+                print(f"Genero: {jogo.genero}")
+                c+=1
         else:
             print("Você ainda não criou nenhum jogo")

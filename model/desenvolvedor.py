@@ -1,6 +1,5 @@
 from model.usuario import Usuario
 from model.catalogo import Catalogo
-from model.jogo import Jogo
 
 class Desenvolvedor(Usuario):
     def __init__(self,tipo_de_usuario, nome_de_usuario: str, senha:str, email:str, termos_condicoes:bool, biografia:str="Sem biografia ainda") -> None:
@@ -22,7 +21,7 @@ class Desenvolvedor(Usuario):
     @property  
     def email(self):
         return self.__email
-    
+
     @email.setter
     def email(self, email):
         if isinstance(email, str):
@@ -30,6 +29,7 @@ class Desenvolvedor(Usuario):
             return "Seu email foi alterado!"
         else:
             return "Insira um email válido."
+        
     
     def checar_termos(self, termos_condicoes):
         if termos_condicoes:
@@ -44,21 +44,20 @@ class Desenvolvedor(Usuario):
         else:
             print("Senha aceita com sucesso!")
             return True
-        
-    def compartilhar_jogo(self, jogo):
-        jogo_adicionar = [jogo]
-        self.__jogos_disponiveis.append(jogo_adicionar)
-        return "Seu jogo foi compartilhado com sucesso!"
     
     @property
     def jogos_criados(self):
         return self.__jogos_criados
+
+    def adicionar_jogo(self, jogo):
+        self.__jogos_criados.append(jogo)
 
     def excluir_jogo(self, titulo):
         for jogo_atual in self.__jogos_disponiveis:
             if jogo_atual[0] == titulo:
                 self.__jogos_disponiveis.remove(jogo_atual)
                 return "Seu jogo foi excluido com sucesso!"
+            
 
 
             

@@ -13,22 +13,38 @@ class DesenvolvedorController():
     def adicionar_user(self, dev):
         self.__devs.append(dev)
 
-    def iniciar_tela(self):
-        self.__tela_jogador.tela_opcoes()
-
-    def compartilhar_jogo(self):
-        pass
+    def compartilhar_jogo(self, jogo):
+        catalago = self.__controlador_sistema.catalago_controler
+        catalago.adicionar_jogo(jogo)
 
     def biblioteca_do_dev(self):
         sessao_atual = self.__controlador_sistema.sessao_atual
         jogos_criados = sessao_atual.jogos_criados
         self.__tela_dev.mostrar_jogos(jogos_criados)
 
+    def criar_jogo(self):
+        jogo_controler = self.__controlador_sistema.jogo_controler
+        jogo_controler.tela_de_criacao()
+
+    def sair(self):
+        exit(0)
+        
     def iniciar_tela(self):
-        acoes = {
-            1:self.compartilhar_jogo,
-            2:self.biblioteca_do_dev
-        }
-        opcao = self.__tela_dev.tela_opcoes()
-        funcao = acoes[opcao]
-        funcao()
+        while True:  # Loop para manter o usuário no menu até ele escolher sair
+            acoes = {
+                1: self.criar_jogo,
+                2: self.biblioteca_do_dev,
+                3: self.sair  # Opção para sair
+            }
+            
+            opcao = self.__tela_dev.tela_opcoes()
+            
+            funcao = acoes.get(opcao)
+            
+            if funcao:
+                funcao()  # Executa a função correspondente à opção escolhida
+            else:
+                print("Opção inválida. Tente novamente.")
+            
+            if opcao == 3:  # Número correspondente à opção de sair
+                break  # Encerra o loop para sair do menue sair
