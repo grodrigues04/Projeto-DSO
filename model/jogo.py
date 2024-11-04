@@ -1,6 +1,6 @@
 class Jogo():
     #inicializadores
-    def __init__(self, titulo:str, autor:object, genero:str,armazenamento:str, biografia_jogo:str) -> None:
+    def __init__(self, titulo:str, autor:object, genero:str,armazenamento:str, biografia_jogo:str, idade_minima) -> None:
         #inicializa os atributos
         self.__armazenamento = armazenamento
         self.__autor = None
@@ -8,8 +8,11 @@ class Jogo():
         self.__biografia_jogo = None 
         self.__titulo = None
         self.__JogadoresAtivos = []
-        
+        self.__idade_minima = None
         #instancializa e verifica os tipos dos atributos que foram inicializados acima
+        if isinstance(idade_minima, int):
+            self.__idade_minima = idade_minima
+
         if isinstance(autor, object):
             self.__autor = autor
             
@@ -33,8 +36,11 @@ class Jogo():
             return "Seu autor foi alterado!"
         else:
             return "Autor incorreto."
-        
-    #getter e setter de genero
+
+    @property
+    def idade_minima(self):
+        return self.__idade_minima
+
     @property
     def genero(self):
         return self.__genero
@@ -81,6 +87,9 @@ class Jogo():
     @property
     def JogadoresAtivos(self):
         return self.__JogadoresAtivos
+    
+    def adicionar_jogador(self,jogador):
+        self.__JogadoresAtivos.append(jogador)
 
         #eu n sei se agente vai precisar de um setter pra lista de jogadore ativos, pq eu n botei setter no diagrama e n me lembro se precisava
         #mas por precaução, vou deixar o código pra adicionar jgoadores aqui, eu tb n sei se herdaremos da classe Jogador ou da classe Usuario

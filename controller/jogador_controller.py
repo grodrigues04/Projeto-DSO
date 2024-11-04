@@ -13,7 +13,24 @@ class JogadorController():
         self.__jogadores.append(jogador)
 
     def comprar_jogo(self):
-        pass
+
+        jogos_controler = self.__controlador_sistema.jogo_controler
+        print(jogos_controler)
+        repositorio = jogos_controler.repositorio_de_jogos
+        print(repositorio)
+        jogo_desejado = self.__tela_jogador.adquirir_jogo(repositorio)
+        jogador_objeto = self.__controlador_sistema.sessao_atual
+        biografia = jogador_objeto.biografia
+        idade_minima = jogo_desejado.idade_minima
+        if len(biografia) > 10:
+            if idade_minima >= jogo_desejado.idade_minima:
+                #Adiciona o jogo na biblioteca do objeto jogador e a lista de jogadores ativos do objeto Jogo
+                jogador_objeto.adquirir_jogo(jogo_desejado)
+                jogador_objeto.adicionar_jogador(jogador_objeto)
+            else:
+                return False, "Idade minima insuficiente"
+        else:
+            return False, "Sua biografia precisa de mais de 10 caracteres para poder adquirir um jogo"
 
     def biblioteca_do_jogador(self):
         sessao_atual = self.__controlador_sistema.sessao_atual
