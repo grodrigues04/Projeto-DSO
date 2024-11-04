@@ -12,13 +12,13 @@ class JogoControler():
                     jogo_infos["autor"],
                     jogo_infos["genero"],
                     jogo_infos["armazenamento"],
-                    jogo_infos["descricao"]
+                    jogo_infos["descricao"],
+                    jogo_infos["idade_minima"]
                     )
         self.__repositorio_de_jogos.append(novo_jogo)
 
         #Adiciona o jogo que foi criado a biblioteca do objeto atual do DEV
         dev = self.__controlador_sistema.sessao_atual
-        print("Quem es tu", dev)
         dev.adicionar_jogo(novo_jogo)
 
     def tela_de_criacao(self):
@@ -26,6 +26,6 @@ class JogoControler():
         jogo_infos = self.__tela_jogo.criar_jogo(dev_atual)
         self.adicionar_jogo(jogo_infos)
 
-    
-    def mostrar_jogos(self):
-        self.__tela_jogo.listar_repositorio(self.__repositorio_de_jogos)
+    @property
+    def repositorio_de_jogos(self):
+        return self.__repositorio_de_jogos
