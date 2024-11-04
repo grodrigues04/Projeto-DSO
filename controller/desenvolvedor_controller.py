@@ -34,7 +34,8 @@ class DesenvolvedorController():
             acoes = {
                 1: self.criar_jogo,
                 2: self.biblioteca_do_dev,
-                3: self.sair  # Opção para sair
+                3: self.sair,
+                4: self.__controlador_sistema.tela_inicial
             }
             
             opcao = self.__tela_dev.tela_opcoes()
