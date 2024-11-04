@@ -20,9 +20,10 @@ class ControllerLogin():
                 if senha_bd == credenciais["senha"]:
                     return True, usuario, "Login bem sucedido. Entrando no sistema..."
                 else:
-                    return False,"Senha errada, tente novamente."
-                
-            return False,"Usuario incorreto ou não existe. Tente novamente"
+                    return False, None,"Senha errada, tente novamente."
+            else:
+                continue
+        return False, None, "Usuario incorreto ou não existe. Tente novamente"
             
     def iniciar_login(self):
         while True: #TODO: ESSE ISISTANCE AQUI TA HORRIVEL
