@@ -26,7 +26,7 @@ class ControladorSistema():
 
     #def abre_tela_inicial(self):
     def realizar_login(self):
-        pass
+        self.__login_controller.iniciar_login()
     
     def comprar_jogo(self):
         pass
@@ -62,6 +62,20 @@ class ControladorSistema():
         tipo_de_conta = self.__login_controller.iniciar_login()
         self.inicializa_sistema(tipo_de_conta)
 
-
+    def tela_inicial(self):
+        while True:
+            opcao = self.__tela_sistema.navegar_no_sistema()
+            opcoes_de_tela = {
+                1:self.realizar_login,
+                2:self.cadastra_usuario,
+                3:exit
+            }
+            funcao = opcoes_de_tela.get(opcao)
+            if funcao:
+                funcao()  # Executa a função correspondente à opção escolhida
+            else:
+                print("Opção inválida. Tente novamente.")    
+            if opcao == 3:  # Número correspondente à opção de sair
+                break  # Encerra o loop para sair do menue sair
         #Talvez, a ordem em que as funções estão sendo chamadas é errada. Cadastro é uma função a parte. Deve haver uma outra função geral que contem uma lista de opções para iniciar o
         #sistema, onde o cadastro e uma das opcoes
