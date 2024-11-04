@@ -1,6 +1,10 @@
 from view.tela_perfil import TelaPerfil
 
 class UsuarioController():
+
+    def sair(self):
+        exit()
+        
     def __init__(self, controlador_sistema) -> None:
         self.__tela_perfil = TelaPerfil()
         self.__controlador_sistema = controlador_sistema
