@@ -1,7 +1,10 @@
 #Talvez, criar uma classe abstrata para controladores de usuarios
 from view.tela_dev import TelaDesenvolvedor
-class DesenvolvedorController():
+from .usuario_controller import UsuarioController
+
+class DesenvolvedorController(UsuarioController):
     def __init__(self, controlador_sistema) -> None:
+        super().__init__(controlador_sistema)
         self.__devs = []
         self.__controlador_sistema = controlador_sistema
         self.__tela_dev = TelaDesenvolvedor()
@@ -26,16 +29,14 @@ class DesenvolvedorController():
         jogo_controler = self.__controlador_sistema.jogo_controler
         jogo_controler.tela_de_criacao()
 
-    def sair(self):
-        exit(0)
-        
     def iniciar_tela(self):
         while True:  # Loop para manter o usuário no menu até ele escolher sair
             acoes = {
                 1: self.criar_jogo,
                 2: self.biblioteca_do_dev,
-                3: self.sair,
-                4: self.__controlador_sistema.tela_inicial
+                3: self.abrir_tela_de_perfil,
+                4: self.sair,
+                5: self.__controlador_sistema.tela_inicial
             }
             
             opcao = self.__tela_dev.tela_opcoes()
