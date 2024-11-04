@@ -20,7 +20,7 @@ class Jogo():
             self.__genero = genero
             
         if isinstance(biografia_jogo, str):
-            self.__biografia = biografia_jogo
+            self.__biografia_jogo = biografia_jogo
             
         if isinstance(titulo, str):
             self.__titulo = titulo
