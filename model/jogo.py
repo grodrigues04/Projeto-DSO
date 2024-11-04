@@ -1,6 +1,6 @@
 class Jogo():
     #inicializadores
-    def __init__(self, titulo:str, autor:object, genero:str,armazenamento:str, biografia_jogo:str, idade_minima) -> None:
+    def __init__(self, titulo:str, autor:object, genero:str,armazenamento:str, biografia_jogo:str, idade_minima:int) -> None:
         #inicializa os atributos
         self.__armazenamento = armazenamento
         self.__autor = None
