@@ -31,7 +31,6 @@ class ControllerCadastro():
 
 
         elif usuario_info["tipo_de_conta"] == "desenvolvedor":
-            print("Entrei aqui, tipo desenvolvedor!")
             dev_control = self.__controlador_sistema.desenvolvedor_controler
             lista_devs = dev_control.users
             dev_existe = any(dev.nome_de_usuario == usuario_info["nome_de_usuario"] for dev in lista_devs)
@@ -49,7 +48,6 @@ class ControllerCadastro():
             else:
                 return False
         else:
-            print("Tipo de usuário inválido.")
             return None
 
     #@função_para_tela_De_acordo_com_o_usuario
