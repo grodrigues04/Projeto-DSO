@@ -30,7 +30,8 @@ class ControladorSistema():
 
     #def abre_tela_inicial(self):
     def realizar_login(self):
-        self.__login_controller.iniciar_login()
+        tipo_de_conta = self.__login_controller.iniciar_login()
+        self.inicializa_sistema(tipo_de_conta)
     
     def comprar_jogo(self):
         pass
