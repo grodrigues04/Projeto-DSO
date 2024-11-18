@@ -1,7 +1,8 @@
 #Tela para criar o jogo, e nao para jogar
-class TelaJogo():
+from .tela_abstrata import AbstractTela
+class TelaJogo(AbstractTela):
     def __init__(self) -> None:
-        pass
+        super().__init__()
 
     def criar_jogo(self):
         print()
@@ -9,7 +10,7 @@ class TelaJogo():
         titulo = input("Digite o titulo do jogo: ")
         genero = input("Digite o genero do jogo: ")
         descricao  = input("Qual a descricao do jogo?")
-        idade = int(input("Digite a idade minima para jogar o jogo"))
+        idade = self.le_num_inteiro("Digite a idade minima para jogar o jogo")
         armazenamento = input("Espaço de armazenamento necessario: ")
         print()
         return {"titulo":titulo,

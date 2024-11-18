@@ -1,4 +1,5 @@
-class TelaDesenvolvedor():
+from .tela_abstrata import AbstractTela
+class TelaDesenvolvedor(AbstractTela):
     def __init__(self) -> None:
         pass
 
@@ -12,7 +13,7 @@ class TelaDesenvolvedor():
         print("5 - Tela inicial")
         print()
         #opcao = self.le_num_inteiro("Escolha a opcao: ", [1,2,3,4,0])
-        opcao = int(input())
+        opcao = self.le_num_inteiro("Escolha uma opção",[1,2,3,4,5])
         return opcao
     
     def mostrar_jogos(self, jogos):

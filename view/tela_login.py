@@ -1,10 +1,10 @@
 #Essa tela tem que ser chamada apos o cadastro, 
 #E apos o login, chamar a tela que varia de acordo com a entidade(jogador,dev) com as opções de navegação
-
-class TelaLogin:
+from .tela_abstrata import AbstractTela
+class TelaLogin(AbstractTela):
 
     def __init__(self) -> None:
-        pass
+        super().__init__()
 
     def mensagem(self,mensagem):
         print(mensagem)
@@ -15,7 +15,7 @@ class TelaLogin:
         print(" --- STEAM DOIS ---")
         print("Em qual conta você você quer entrar? [DESENVOLVEDOR(1)|JOGADOR(2)]")
         while True:
-            tipo_de_conta = int(input())
+            tipo_de_conta = self.le_num_inteiro("Escolha uma opcao", [1,2])
             print("Digite seu nome de usuario")
             nome_de_usuario = input()
             print("Digite sua senha")
