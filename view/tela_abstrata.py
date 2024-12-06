@@ -1,21 +1,39 @@
 from abc import ABC, abstractmethod
+# import re
+import PySimpleGUI as sg
+# from exceptions.wrong_input_exception import WrongInputException
 
-class AbstractTela(ABC):
-    @abstractmethod
-    def __init__(self) -> None:
+
+class AbstractView(ABC):
+
+    def __init__(self):
         pass
 
-    #essa função trata o caso de não digitar um valor valido
-    #note que está dentro de um while True. Só sai do loop quando digitado um valor correto
-    def le_num_inteiro(self, mensagem=" ", ints_validos = None):
+    #Fica responsavel por abrir as telas
+    def abrir_tela(self, window):
         while True:
-            valor_lido = input(mensagem)
-            try:
-                valor_int = int(valor_lido) #tenta transformar o valor lido em inteiro.
-                if ints_validos and valor_int not in ints_validos:
-                    raise ValueError #será lançada apenas se o número não é o esperado
-                return valor_int
-            except ValueError: #aqui cai se não for int ou se não for valido
-                print("Valor incorreto!")
-                if ints_validos:
-                    print("Valores válidos: ", ints_validos)
+            event, values = window.read()
+            if event == sg.WIN_CLOSED or event == 'ok':
+                break
+        window.close()
+        print(event, values)
+        return [event, values]
+
+    def iniciar_componentes(self, titulo, opções):
+        #sg.theme_previewer()
+        sg.ChangeLookAndFeel('DarkGrey15')
+        layout = [
+            [sg.Text(titulo, font=("Helvetica", 18))],
+            [sg.Text('Escolha sua opção', font=("Arial", 14))]
+        ]
+
+        for k, value in sorted(opções.items()):
+            if k != 0:
+                layout.append([sg.Radio(value, "RD1", key=str(k))])
+
+        layout.append([sg.Button('Confirmar'), sg.Cancel('Voltar')])
+        return sg.Window('Sistema de cursos', layout)
+
+    def open(self, window):
+        button, values = window.Read()
+        return button, values
