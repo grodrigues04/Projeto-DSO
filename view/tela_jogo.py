@@ -1,6 +1,6 @@
 #Tela para criar o jogo, e nao para jogar
-from .tela_abstrata import AbstractTela
-class TelaJogo(AbstractTela):
+from .tela_abstrata import AbstractView
+class TelaJogo(AbstractView):
     def __init__(self) -> None:
         super().__init__()
 

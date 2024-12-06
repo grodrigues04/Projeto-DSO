@@ -1,5 +1,5 @@
-from .tela_abstrata import AbstractTela
-class TelaDesenvolvedor(AbstractTela):
+from .tela_abstrata import AbstractView
+class TelaDesenvolvedor(AbstractView):
     def __init__(self) -> None:
         pass
 

@@ -1,5 +1,5 @@
-from .tela_abstrata import AbstractTela
-class TelaPerfil(AbstractTela):
+from .tela_abstrata import AbstractView
+class TelaPerfil(AbstractView):
     def __init__(self) -> None:
         super().__init__()
 

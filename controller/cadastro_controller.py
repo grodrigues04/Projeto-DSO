@@ -7,11 +7,11 @@ class ControllerCadastro():
         self.__tela_cadastro = TelaCadastro()
         self.__controlador_sistema = controlador_sistema
 
-    def cadastrar_usuario(self):
-        tipos_de_usuario, saudacao = self.__tela_cadastro.tipo_de_cadastro()
-        usuario_info = self.__tela_cadastro.cadastroGeral(tipos_de_usuario, saudacao)
-
-        if usuario_info["tipo_de_conta"] == "jogador":
+    def cadastrar_usuario(self, tipo_de_conta):
+        # tipos_de_usuario, saudacao = self.__tela_cadastro.tipo_de_cadastro()
+        # usuario_info = self.__tela_cadastro.cadastroGeral(tipos_de_usuario, saudacao)
+        
+        if tipo_de_conta == "jogador":
             jogador_control = self.__controlador_sistema.jogador_controler
             lista_jogadores = jogador_control.users
             jogador_existe = any(jogador.nome_de_usuario == usuario_info["nome_de_usuario"] for jogador in lista_jogadores)

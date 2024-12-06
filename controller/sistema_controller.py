@@ -29,8 +29,8 @@ class ControladorSistema():
         return self.__jogo_controller
 
     #def abre_tela_inicial(self):
-    def realizar_login(self):
-        tipo_de_conta = self.__login_controller.iniciar_login()
+    def realizar_login(self, tipo_de_conta):
+        tipo_de_conta = self.__login_controller.iniciar_login(tipo_de_conta)
         self.inicializa_sistema(tipo_de_conta)
     
     def comprar_jogo(self):
@@ -66,22 +66,34 @@ class ControladorSistema():
         tela_do_usuario = tipos_de_tela[sistema]
         tela_do_usuario() #Chamando a tela de acordo com o tipo de usuario
 
-    def cadastra_usuario(self):
-        self.__sessao_atual = self.__cadastro_controller.cadastrar_usuario()
+    def cadastra_usuario(self, tipo_de_conta):
+        self.__sessao_atual = self.__cadastro_controller.cadastrar_usuario(tipo_de_conta)
         tipo_de_conta = self.__login_controller.iniciar_login()
         self.inicializa_sistema(tipo_de_conta)
 
+    def opção_escolhida(self, values):
+        for key in [1, 2]:
+            if values[key]:  # Verifica se o valor é True
+                ação_escolhida = key
+                break   
+        for key in ['desenvolvedor', 'jogador']:
+            if values[key]:  # Verifica se o valor é True
+                tipo_de_conta = key
+                break
+        return[ação_escolhida, tipo_de_conta]
+
     def tela_inicial(self):
         while True:
-            opcao = self.__tela_sistema.navegar_no_sistema()
+            opcao = self.__tela_sistema.rodar()
+            opcao = self.opção_escolhida(opcao[1])
+            print(opcao)
             opcoes_de_tela = {
                 1:self.realizar_login,
                 2:self.cadastra_usuario,
-                3:exit
             }
-            funcao = opcoes_de_tela.get(opcao)
+            funcao = opcoes_de_tela.get(opcao[0]) #Pegando a ação escolhida do return da função
             if funcao:
-                funcao()  # Executa a função correspondente à opção escolhida
+                funcao(opcao[1])  #qual o tipo de conta
             else:
                 print("Opção inválida. Tente novamente.")    
             if opcao == 3:  # Número correspondente à opção de sair

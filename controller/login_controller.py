@@ -25,9 +25,18 @@ class ControllerLogin():
                 continue
         return False, None, "Usuario incorreto ou não existe. Tente novamente"
             
-    def iniciar_login(self):
-        while True: #TODO: ESSE ISISTANCE AQUI TA HORRIVEL
-            usuario_credenciais = self.__tela_login.forms_login()
+    def iniciar_login(self, tipo_de_conta):
+        conta = {"desenvolvedor":1, "jogador":2}
+        
+        while True: 
+            usuario_credenciais = self.__tela_login.rodar(tipo_de_conta)
+            usuario_credenciais = {
+                "nome_de_usuario":usuario_credenciais["values"][0],
+                "senha":usuario_credenciais["values"][1],
+                "tipo_de_conta": conta[tipo_de_conta]
+            }
+
+            print("Usuario credenciais ta voltando assim:", usuario_credenciais)
             status, usuario, mensagem = self.verificar_credenciais(usuario_credenciais)
             self.__controlador_sistema.sessao_atual = usuario
             self.__tela_login.mensagem(mensagem)

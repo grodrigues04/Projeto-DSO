@@ -1,6 +1,6 @@
-from .tela_abstrata import AbstractTela
+from .tela_abstrata import AbstractView
 
-class TelaJogador(AbstractTela):
+class TelaJogador(AbstractView):
     def __init__(self) -> None:
         super().__init__()
 

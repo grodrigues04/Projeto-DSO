@@ -1,6 +1,6 @@
 from datetime import datetime
-from .tela_abstrata import AbstractTela
-class TelaCadastro(AbstractTela):
+from .tela_abstrata import AbstractView
+class TelaCadastro(AbstractView):
     def __init__(self) -> None:
         super().__init__()
     def confirma_senha(self):
@@ -56,5 +56,4 @@ class TelaCadastro(AbstractTela):
         tipos_de_usuario = {1:self.cadastrarJogador, 2:self.cadastrarDev}
         saudacao_usuario = {1:"Jogador", 2:"Desenvolvedor"}
         print("Você quer criar uma conta de JOGADOR[1] ou DESENVOLVEDOR[2]")
-        tipo_escolhido = self.le_num_inteiro("Escolha uma opcao", [1,2])
         return tipos_de_usuario[tipo_escolhido], saudacao_usuario[tipo_escolhido]
