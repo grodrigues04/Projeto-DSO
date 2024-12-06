@@ -15,7 +15,7 @@ class TelaLogin(AbstractTela):
         print(" --- STEAM DOIS ---")
         print("Em qual conta você você quer entrar? [DESENVOLVEDOR(1)|JOGADOR(2)]")
         while True:
-            tipo_de_conta = self.le_num_inteiro("Escolha uma opcao", [1,2])
+            tipo_de_conta = self.le_num_inteiro("Escolha uma opcao", [1,2,3])
             print("Digite seu nome de usuario")
             nome_de_usuario = input()
             print("Digite sua senha")

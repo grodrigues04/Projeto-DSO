@@ -29,7 +29,6 @@ class ControllerLogin():
         while True: #TODO: ESSE ISISTANCE AQUI TA HORRIVEL
             usuario_credenciais = self.__tela_login.forms_login()
             status, usuario, mensagem = self.verificar_credenciais(usuario_credenciais)
-            print("print do usuario que ta chegando:",usuario)
             self.__controlador_sistema.sessao_atual = usuario
             self.__tela_login.mensagem(mensagem)
             if status:

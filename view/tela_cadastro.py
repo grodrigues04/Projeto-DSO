@@ -35,7 +35,7 @@ class TelaCadastro(AbstractTela):
         print("Você concorda com os termos [S/N] ?")
         termos = input().upper()
         # if termos == "N":
-        #     print("Você não concordou com os termos, portanto a conta não vai ser criada")
+        #     print("Você não concordou com os termos, portan   to a conta não vai ser criada")
         #     return False
         print("Deseja criar sua biografia agora [S/N]?")
         usuario_info = {"tipo_de_conta":"desenvolvedor","nome_de_usuario":login, "biografia":biografia, "email":email, "termos":termos, "senha":senha}

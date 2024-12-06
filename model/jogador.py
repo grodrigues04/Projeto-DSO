@@ -1,5 +1,4 @@
 from model.usuario import Usuario
-from model.catalogo import Catalogo
 from model.jogo import Jogo
 
 class Jogador(Usuario):

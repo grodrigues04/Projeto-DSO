@@ -1,5 +1,4 @@
 from model.usuario import Usuario
-from model.catalogo import Catalogo
 
 class Desenvolvedor(Usuario):
     def __init__(self,tipo_de_usuario, nome_de_usuario: str, senha:str, email:str, termos_condicoes:bool, biografia:str="Sem biografia ainda") -> None:
@@ -17,7 +16,7 @@ class Desenvolvedor(Usuario):
             self.__termos_condicoes = termos_condicoes
         else:
             return False
-
+        
     @property  
     def email(self):
         return self.__email

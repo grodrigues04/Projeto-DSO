@@ -27,7 +27,6 @@ class JogadorController(UsuarioController): #TEM QUE TIRAR O SELF DO CONTROLADOR
         idade_minima = jogo_desejado.idade_minima
         if len(biografia) > 10:
             if idade_minima >= jogo_desejado.idade_minima:
-                print("OBJETO JOGADOR:",jogador_objeto)
                 #Adiciona o jogo na biblioteca do objeto jogador e a lista de jogadores ativos do objeto Jogo
                 jogador_objeto.adquirir_jogo(jogo_desejado)
                 jogo_desejado.adicionar_jogador(jogador_objeto)
@@ -49,11 +48,11 @@ class JogadorController(UsuarioController): #TEM QUE TIRAR O SELF DO CONTROLADOR
                 1: self.comprar_jogo,
                 2: self.biblioteca_do_jogador,
                 3: self.abrir_tela_de_perfil,
-                4: self.sair  
+                4: self.sair,
+                5: self.__controlador_sistema.tela_inicial
             }
             
             opcao = self.__tela_jogador.tela_opcoes()
-            
             funcao = acoes[opcao]
             resposta = funcao()
             
