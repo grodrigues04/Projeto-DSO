@@ -71,21 +71,22 @@ class ControladorSistema():
         tipo_de_conta = self.__login_controller.iniciar_login()
         self.inicializa_sistema(tipo_de_conta)
 
-    def opção_escolhida(self, values):
-        for key in [1, 2]:
-            if values[key]:  # Verifica se o valor é True
-                ação_escolhida = key
-                break   
-        for key in ['desenvolvedor', 'jogador']:
-            if values[key]:  # Verifica se o valor é True
-                tipo_de_conta = key
-                break
-        return[ação_escolhida, tipo_de_conta]
+    def opção_escolhida(self, event, values):
+        if event!= None:
+            for key in [1, 2]:
+                if values[key]:  # Verifica se o valor é True
+                    ação_escolhida = key
+                    break   
+            for key in ['desenvolvedor', 'jogador']:
+                if values[key]:  # Verifica se o valor é True
+                    tipo_de_conta = key
+                    break
+            return[ação_escolhida, tipo_de_conta]
 
     def tela_inicial(self):
-        while True:
-            opcao = self.__tela_sistema.rodar()
-            opcao = self.opção_escolhida(opcao[1])
+        opcao = self.__tela_sistema.rodar()
+        opcao = self.opção_escolhida(opcao[0], opcao[1])
+        if opcao:
             print(opcao)
             opcoes_de_tela = {
                 1:self.realizar_login,
@@ -96,7 +97,7 @@ class ControladorSistema():
                 funcao(opcao[1])  #qual o tipo de conta
             else:
                 print("Opção inválida. Tente novamente.")    
-            if opcao == 3:  # Número correspondente à opção de sair
-                break  # Encerra o loop para sair do menue sair
+
+       
         #Talvez, a ordem em que as funções estão sendo chamadas é errada. Cadastro é uma função a parte. Deve haver uma outra função geral que contem uma lista de opções para iniciar o
         #sistema, onde o cadastro e uma das opcoes

@@ -3,6 +3,9 @@ class TelaPerfil(AbstractView):
     def __init__(self) -> None:
         super().__init__()
 
+    def configurar_tela(): #Arrumar dps
+        pass
+
     def tela_opcoes(self):
         print()
         print(" ----- PERFIL ----- ")

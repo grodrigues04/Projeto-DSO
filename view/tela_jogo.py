@@ -4,6 +4,9 @@ class TelaJogo(AbstractView):
     def __init__(self) -> None:
         super().__init__()
 
+    def configurar_tela(): #Arrumar dps
+        pass
+
     def criar_jogo(self):
         print()
         print(" --- Criando seu jogo --- ")

@@ -7,6 +7,9 @@ class TelaLogin(AbstractView):
     def __init__(self) -> None:
         super().__init__()
 
+    def configurar_tela(): #Arrumar dps
+        pass
+
     def mensagem(self,mensagem):
         print(mensagem)
 

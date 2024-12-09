@@ -3,6 +3,9 @@ class TelaDesenvolvedor(AbstractView):
     def __init__(self) -> None:
         pass
 
+    def configurar_tela(): #Arrumar dps
+        pass
+    
     def tela_opcoes(self):
         print()
         print("--- DESENVOLVEDOR ---")
