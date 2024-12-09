@@ -9,31 +9,29 @@ class AbstractView(ABC):
     def __init__(self):
         pass
 
+
+    @abstractmethod
+    def configurar_tela():
+        pass
+
     #Fica responsavel por abrir as telas
-    def abrir_tela(self, window):
+    def abrir_tela(self, window, condicao_especial=None):
         while True:
             event, values = window.read()
             if event == sg.WIN_CLOSED or event == 'ok':
                 break
+            
+            if condicao_especial!=None:
+
+                if condicao_especial=="password":
+                    senha = values["senha_1"]
+                    confirma_senha = values["senha_2"]
+                    if senha != confirma_senha:
+                        sg.popup("A senhas não conferem")
+                    else:
+                        break
+
         window.close()
         print(event, values)
         return [event, values]
 
-    def iniciar_componentes(self, titulo, opções):
-        #sg.theme_previewer()
-        sg.ChangeLookAndFeel('DarkGrey15')
-        layout = [
-            [sg.Text(titulo, font=("Helvetica", 18))],
-            [sg.Text('Escolha sua opção', font=("Arial", 14))]
-        ]
-
-        for k, value in sorted(opções.items()):
-            if k != 0:
-                layout.append([sg.Radio(value, "RD1", key=str(k))])
-
-        layout.append([sg.Button('Confirmar'), sg.Cancel('Voltar')])
-        return sg.Window('Sistema de cursos', layout)
-
-    def open(self, window):
-        button, values = window.Read()
-        return button, values
