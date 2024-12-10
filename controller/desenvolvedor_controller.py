@@ -1,20 +1,25 @@
 #Talvez, criar uma classe abstrata para controladores de usuarios
 from view.tela_dev import TelaDesenvolvedor
 from .usuario_controller import UsuarioController
+from DAOs.desenvolvedor_DAO import DesenvolvedorDAO
 
 class DesenvolvedorController(UsuarioController):
     def __init__(self, controlador_sistema) -> None:
         super().__init__(controlador_sistema)
-        self.__devs = []
+        #self.__devs = []
+        self.__desenvolvedor_DAO = DesenvolvedorDAO()
+
         self.__controlador_sistema = controlador_sistema
         self.__tela_dev = TelaDesenvolvedor()
 
     @property
     def users(self):
-        return self.__devs
+        print("O GET ALL:", self.__desenvolvedor_DAO.get_all() )
+        return self.__desenvolvedor_DAO.get_all()
     
     def adicionar_user(self, dev):
-        self.__devs.append(dev)
+        #self.__devs.append(dev)
+        self.__desenvolvedor_DAO.add(dev)
 
     def compartilhar_jogo(self, jogo):
         catalago = self.__controlador_sistema.catalago_controler
