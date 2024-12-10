@@ -96,8 +96,4 @@ class ControladorSistema():
             if funcao:
                 funcao(opcao[1])  #qual o tipo de conta
             else:
-                print("Opção inválida. Tente novamente.")    
-
-       
-        #Talvez, a ordem em que as funções estão sendo chamadas é errada. Cadastro é uma função a parte. Deve haver uma outra função geral que contem uma lista de opções para iniciar o
-        #sistema, onde o cadastro e uma das opcoes
+                print("Opção inválida. Tente novamente.")

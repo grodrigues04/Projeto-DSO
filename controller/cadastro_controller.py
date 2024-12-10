@@ -46,7 +46,7 @@ class ControllerCadastro:
             return novo_dev
 
         elif tipo_de_conta == "jogador":
-            print(usuario_info)
+            print("INFOS DO USUARIO:",usuario_info)
             novo_jogador = Jogador(
                 usuario_info["tipo_de_conta"],
                 usuario_info["nome_de_usuario"],
