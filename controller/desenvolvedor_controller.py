@@ -27,31 +27,27 @@ class DesenvolvedorController(UsuarioController):
 
     def biblioteca_do_dev(self):
         sessao_atual = self.__controlador_sistema.sessao_atual
-        jogos_criados = sessao_atual.jogos_criados
-        self.__tela_dev.mostrar_jogos(jogos_criados)
+        # dev_atual = sessao_atual.nome_de_usuario
+        # jogos = self.__desenvolvedor_DAO.get(dev_atual).jogos_criados
+        #print("os jogos que tao vindo do espacle", jogos)
+        jogos = sessao_atual.jogos_criados
+        biblioteca = []
+        for jogo in jogos:
+            print("Jogos na iteração o jogo:", jogo)
+            biblioteca.append({"titulo":jogo["titulo"], "genero":jogo["genero"], "autor":jogo["autor"], "idade_minima":jogo["idade_minima"] })
+
+        return biblioteca
 
     def criar_jogo(self):
         jogo_controler = self.__controlador_sistema.jogo_controler
         jogo_controler.tela_de_criacao()
 
     def iniciar_tela(self):
-        while True:  # Loop para manter o usuário no menu até ele escolher sair
-            acoes = {
-                1: self.criar_jogo,
-                2: self.biblioteca_do_dev,
-                3: self.abrir_tela_de_perfil,
-                4: self.sair,
-                5: self.__controlador_sistema.tela_inicial
-            }
-            
-            opcao = self.__tela_dev.tela_opcoes()
-            
-            funcao = acoes.get(opcao)
-            
-            if funcao:
-                funcao()  # Executa a função correspondente à opção escolhida
-            else:
-                print("Opção inválida. Tente novamente.")
-            
-            if opcao == 3:  # Número correspondente à opção de sair
-                break  # Encerra o loop para sair do menue sair
+        info_tela = self.__tela_dev.rodar()
+        evento = info_tela["event"]
+        print("evento printado no controlador:", evento )
+        if evento=="Criar jogo":
+            pass
+        elif evento=="Lista de jogos desenvolvidos":
+            print(" EU TO ENTRANDO AQUI")
+            self.__tela_dev.configurar_get(self.biblioteca_do_dev())

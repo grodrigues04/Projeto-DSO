@@ -9,10 +9,10 @@ class ControllerLogin():
     def verificar_credenciais(self, credenciais) -> bool:
         tipos_de_usuario = {1:self.__controlador_sistema.desenvolvedor_controler,
                             2:self.__controlador_sistema.jogador_controler 
-                            }
+        }
         controler_de_verificacao = tipos_de_usuario[credenciais["tipo_de_conta"]]
         lista_de_usuarios = controler_de_verificacao.users
-
+        print(lista_de_usuarios)
         for usuario in lista_de_usuarios:
             if usuario.nome_de_usuario == credenciais["nome_de_usuario"]:
                 login_credenciais = usuario.fazer_login() 
@@ -20,9 +20,12 @@ class ControllerLogin():
                 if senha_bd == credenciais["senha"]:
                     return True, usuario, "Login bem sucedido. Entrando no sistema..."
                 else:
+                    self.__tela_login.exibir_mensagem("Senha errada. Tente novamente")
                     return False, None,"Senha errada, tente novamente."
             else:
                 continue
+
+        self.__tela_login.exibir_mensagem("Usuario incorreto ou não existe. Tente novamente")
         return False, None, "Usuario incorreto ou não existe. Tente novamente"
             
     def iniciar_login(self, tipo_de_conta):

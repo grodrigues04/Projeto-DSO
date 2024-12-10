@@ -68,7 +68,7 @@ class ControladorSistema():
 
     def cadastra_usuario(self, tipo_de_conta):
         self.__sessao_atual = self.__cadastro_controller.cadastrar_usuario(tipo_de_conta)
-        tipo_de_conta = self.__login_controller.iniciar_login()
+        tipo_de_conta = self.__login_controller.iniciar_login(tipo_de_conta)
         self.inicializa_sistema(tipo_de_conta)
 
     def opção_escolhida(self, event, values):
