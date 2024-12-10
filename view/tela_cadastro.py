@@ -27,8 +27,8 @@ class TelaCadastro(AbstractView):
 
     def configurar_tela_desenvolvedor(self, layout):
         layout.append([sg.Text("Qual seu Email"),sg.InputText("", key="email")])
-        layout.append([sg.Text("Qual seu ano de nascimento"),sg.InputText("", key="senha_1", password_char="*")])
-        layout.append([sg.Radio("Li e concordo com os termos","termos", key="concorda"), sg.Radio("Não li os termos","termos", key="concorda")])
+        layout.append([sg.Radio("Li e concordo com os termos", "termos", key="termos", default=True, enable_events=True)])
+        layout.append([sg.Radio("Não li os termos", "termos", key="termos", enable_events=True)])
         layout.append([sg.Button("OK")])
 
         window = sg.Window('Cadastro Desenvolvedor', layout, finalize=True)
