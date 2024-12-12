@@ -14,7 +14,6 @@ class DesenvolvedorController(UsuarioController):
 
     @property
     def users(self):
-        print("O GET ALL:", self.__desenvolvedor_DAO.get_all() )
         return self.__desenvolvedor_DAO.get_all()
     
     def adicionar_user(self, dev):
@@ -33,7 +32,6 @@ class DesenvolvedorController(UsuarioController):
         jogos = sessao_atual.jogos_criados
         biblioteca = []
         for jogo in jogos:
-            print("Jogos na iteração o jogo:", jogo)
             biblioteca.append({"titulo":jogo["titulo"], "genero":jogo["genero"], "autor":jogo["autor"], "idade_minima":jogo["idade_minima"] })
 
         return biblioteca
@@ -45,9 +43,12 @@ class DesenvolvedorController(UsuarioController):
     def iniciar_tela(self):
         info_tela = self.__tela_dev.rodar()
         evento = info_tela["event"]
-        print("evento printado no controlador:", evento )
+
+        if evento== "voltar":
+            tela_anterior = self.__tela_dev.voltar_tela()
+            print("Tela anterior:", tela_anterior)
+            self.__tela_dev.abrir_tela(tela_anterior)
         if evento=="Criar jogo":
             pass
         elif evento=="Lista de jogos desenvolvidos":
-            print(" EU TO ENTRANDO AQUI")
             self.__tela_dev.configurar_get(self.biblioteca_do_dev())

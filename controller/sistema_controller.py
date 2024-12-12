@@ -15,6 +15,7 @@ class ControladorSistema():
         self.__jogador_controller = JogadorController(self)
         self.__jogo_controller = JogoControler(self)
         self.__usuario_controller = UsuarioController(self)
+        self.__pilha_telas = []
 
     @property
     def cadastro_controler(self):
@@ -87,7 +88,6 @@ class ControladorSistema():
         opcao = self.__tela_sistema.rodar()
         opcao = self.opção_escolhida(opcao[0], opcao[1])
         if opcao:
-            print(opcao)
             opcoes_de_tela = {
                 1:self.realizar_login,
                 2:self.cadastra_usuario,

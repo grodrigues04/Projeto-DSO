@@ -6,7 +6,7 @@ class TelaLogin(AbstractView):
 
     def __init__(self) -> None:
         super().__init__()
-
+    
     def mensagem(self,mensagem):
         print(mensagem)
 

@@ -7,7 +7,7 @@ import PySimpleGUI as sg
 class AbstractView(ABC):
 
     def __init__(self):
-        self.__ultima_tela = None
+        self.__pilha_telas = []
 
     @property
     def ultima_tela(self):
@@ -40,21 +40,40 @@ class AbstractView(ABC):
     def configurar_tela():
         pass
 
-    #Fica responsavel por abrir as telas
+    def voltar_tela(self):   
+        print("TELAS:", self.__pilha_telas)
+        if len(self.__pilha_telas) > 1:
+            print("To caindo nesse")
+            self.__pilha_telas.pop()  # Remove a tela atual
+            return self.__pilha_telas[-1]  # Retorna a penúltima tela
+        elif len(self.__pilha_telas) == 1:
+            print("To caindo nesse if da funcao ?")
+            return self.__pilha_telas[-1]  # Se for a única tela, retorna ela mesma
+        return None  # Não há telas para voltar
+    #Fica responsável por abrir as telas
+    
     def abrir_tela(self, window=None, condicao_especial=None, mensagem=None):
-        self.__ultima_tela = window
+        if len(self.__pilha_telas) == 0 or self.__pilha_telas[-1] != window:
+            print("Adicionei uma tela...")
+            self.__pilha_telas.append(window)  # Adiciona uma tela apenas se for nova
+            print("Telas atuais:", self.__pilha_telas)
         
         lista_de_eventos = ["ok","Criar jogo","Lista de jogos desenvolvidos","Editar Perfil",
-                             "Encerrar Sistema","Tela inicial" ]
+                             "Encerrar Sistema","Tela inicial", "voltar" ]
         
         while True:
             if mensagem:
                 window["-MENSAGEM-"].update(mensagem)
 
             event, values = window.read()
-            print(event)
+            print("aqui que sai o print voltar",event)
             if event == sg.WIN_CLOSED or event in lista_de_eventos:
-                break 
+                break
+
+            if event=="voltar":
+                tela = self.voltar_tela()
+                return tela
+
 
             if condicao_especial!=None:
 
@@ -62,11 +81,12 @@ class AbstractView(ABC):
                     senha = values["senha_1"]
                     confirma_senha = values["senha_2"]
                     if senha != confirma_senha:
-                        sg.popup("A senhas não conferem")
+                        sg.popup("As senhas não conferem")
                     else:
                         break
-                    
+
         window.close()
-        print(event, values)
         return [event, values]
+
+
 

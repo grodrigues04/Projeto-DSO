@@ -1,5 +1,6 @@
 from view.tela_jogador import TelaJogador
 from .usuario_controller import UsuarioController
+
 class JogadorController(UsuarioController): #TEM QUE TIRAR O SELF DO CONTROLADOR DO SISTEMA QUANDO INSTANCIA O JOGADOR CONTROLER
     def __init__(self, controlador_sistema) -> None:
         super().__init__(controlador_sistema)
@@ -32,7 +33,7 @@ class JogadorController(UsuarioController): #TEM QUE TIRAR O SELF DO CONTROLADOR
                 jogo_desejado.adicionar_jogador(jogador_objeto)
                 self.iniciar_tela()
             else:
-                return "Idade minima insuficiente"
+                return "Idade mínima insuficiente"
 
         else:
             return "Sua biografia precisa de mais de 10 caracteres para poder adquirir um jogo"

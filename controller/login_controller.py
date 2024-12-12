@@ -12,7 +12,6 @@ class ControllerLogin():
         }
         controler_de_verificacao = tipos_de_usuario[credenciais["tipo_de_conta"]]
         lista_de_usuarios = controler_de_verificacao.users
-        print(lista_de_usuarios)
         for usuario in lista_de_usuarios:
             if usuario.nome_de_usuario == credenciais["nome_de_usuario"]:
                 login_credenciais = usuario.fazer_login() 
@@ -39,7 +38,6 @@ class ControllerLogin():
                 "tipo_de_conta": conta[tipo_de_conta]
             }
 
-            print("Usuario credenciais ta voltando assim:", usuario_credenciais)
             status, usuario, mensagem = self.verificar_credenciais(usuario_credenciais)
             self.__controlador_sistema.sessao_atual = usuario
             self.__tela_login.mensagem(mensagem)

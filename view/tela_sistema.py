@@ -3,7 +3,7 @@ from .tela_abstrata import AbstractView
 
 class TelaSistemaInicial(AbstractView):
     def __init__(self):
-        pass
+        super().__init__()
 
     def configurar_tela(self):
         layout = [  
@@ -18,6 +18,7 @@ class TelaSistemaInicial(AbstractView):
     
     def rodar(self):
         window = self.configurar_tela()
+        # self.__ultima_tela = window
         event, values = self.abrir_tela(window)
         return (event, values)
         
