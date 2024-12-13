@@ -15,6 +15,7 @@ class ControladorSistema():
         self.__jogador_controller = JogadorController(self)
         self.__jogo_controller = JogoControler(self)
         self.__usuario_controller = UsuarioController(self)
+        self.__pilha_telas = []
 
     @property
     def cadastro_controler(self):
@@ -28,9 +29,29 @@ class ControladorSistema():
     def jogo_controler(self):
         return self.__jogo_controller
 
+    def adicionar_tela(self, window):
+        if len(self.__pilha_telas) == 0 or self.__pilha_telas[-1] != window:
+            print("Adicionei uma tela...")
+            self.__pilha_telas.append(window)  # Adiciona uma tela apenas se for nova
+            print("Telas atuais:", self.__pilha_telas)
+        self.__pilha_telas
+
+    def voltar_telas(self):
+        print("TELAS:", self.__pilha_telas)
+        if len(self.__pilha_telas) > 1:
+            print("To caindo nesse")
+            ultima_tela = self.__pilha_telas.pop()  # Remove a tela atual
+            self.__tela_sistema.fechar_tela(ultima_tela)
+            return self.__pilha_telas[-1]  # Retorna a penúltima tela
+        elif len(self.__pilha_telas) == 1:
+            print("To caindo nesse if da funcao ?")
+            return self.__pilha_telas[-1]  # Se for a única tela, retorna ela mesma
+        return None  # Não há telas para voltar
+    #Fica responsável por abrir as telas  
+
     #def abre_tela_inicial(self):
-    def realizar_login(self):
-        tipo_de_conta = self.__login_controller.iniciar_login()
+    def realizar_login(self, tipo_de_conta):
+        tipo_de_conta = self.__login_controller.iniciar_login(tipo_de_conta)
         self.inicializa_sistema(tipo_de_conta)
     
     def comprar_jogo(self):
@@ -66,25 +87,33 @@ class ControladorSistema():
         tela_do_usuario = tipos_de_tela[sistema]
         tela_do_usuario() #Chamando a tela de acordo com o tipo de usuario
 
-    def cadastra_usuario(self):
-        self.__sessao_atual = self.__cadastro_controller.cadastrar_usuario()
-        tipo_de_conta = self.__login_controller.iniciar_login()
+    def cadastra_usuario(self, tipo_de_conta):
+        self.__sessao_atual = self.__cadastro_controller.cadastrar_usuario(tipo_de_conta)
+        tipo_de_conta = self.__login_controller.iniciar_login(tipo_de_conta)
         self.inicializa_sistema(tipo_de_conta)
 
+    def opção_escolhida(self, event, values):
+        if event!= None:
+            for key in [1, 2]:
+                if values[key]:  # Verifica se o valor é True
+                    ação_escolhida = key
+                    break   
+            for key in ['desenvolvedor', 'jogador']:
+                if values[key]:  # Verifica se o valor é True
+                    tipo_de_conta = key
+                    break
+            return[ação_escolhida, tipo_de_conta]
+
     def tela_inicial(self):
-        while True:
-            opcao = self.__tela_sistema.navegar_no_sistema()
+        opcao = self.__tela_sistema.rodar()
+        opcao = self.opção_escolhida(opcao[0], opcao[1])
+        if opcao:
             opcoes_de_tela = {
                 1:self.realizar_login,
                 2:self.cadastra_usuario,
-                3:exit
             }
-            funcao = opcoes_de_tela.get(opcao)
+            funcao = opcoes_de_tela.get(opcao[0]) #Pegando a ação escolhida do return da função
             if funcao:
-                funcao()  # Executa a função correspondente à opção escolhida
+                funcao(opcao[1])  #qual o tipo de conta
             else:
-                print("Opção inválida. Tente novamente.")    
-            if opcao == 3:  # Número correspondente à opção de sair
-                break  # Encerra o loop para sair do menue sair
-        #Talvez, a ordem em que as funções estão sendo chamadas é errada. Cadastro é uma função a parte. Deve haver uma outra função geral que contem uma lista de opções para iniciar o
-        #sistema, onde o cadastro e uma das opcoes
+                print("Opção inválida. Tente novamente.")

@@ -1,7 +1,7 @@
 from model.usuario import Usuario
 
 class Desenvolvedor(Usuario):
-    def __init__(self,tipo_de_usuario, nome_de_usuario: str, senha:str, email:str, termos_condicoes:bool, biografia:str="Sem biografia ainda") -> None:
+    def __init__(self, tipo_de_usuario, nome_de_usuario: str, senha:str, email:str, termos_condicoes:bool, biografia:str="Sem biografia ainda") -> None:
         super().__init__(tipo_de_usuario, nome_de_usuario, senha, biografia)
         self.__email = None
         self.__termos_condicoes = None
@@ -12,11 +12,21 @@ class Desenvolvedor(Usuario):
         else:
             return False
         
-        if isinstance(termos_condicoes, str):
+        if isinstance(termos_condicoes, bool):
             self.__termos_condicoes = termos_condicoes
         else:
             return False
         
+    @property
+    def termos(self):
+        return self.__termos_condicoes
+    
+    @termos.setter
+    def termos(self, termos):
+        if isinstance(termos, bool):
+            self.__termos_condicoes = termos
+
+
     @property  
     def email(self):
         return self.__email

@@ -1,18 +1,22 @@
 from view.tela_jogador import TelaJogador
 from .usuario_controller import UsuarioController
+from DAOs.jogador_DAO import JogadorDAO
 class JogadorController(UsuarioController): #TEM QUE TIRAR O SELF DO CONTROLADOR DO SISTEMA QUANDO INSTANCIA O JOGADOR CONTROLER
     def __init__(self, controlador_sistema) -> None:
         super().__init__(controlador_sistema)
-        self.__jogadores = []
+        #self.__jogadores = []
+        self.__jogador_DAO = JogadorDAO()
         self.__controlador_sistema = controlador_sistema
         self.__tela_jogador = TelaJogador()
 
     @property
     def users(self):
-        return self.__jogadores
+        #return self.__jogadores
+        return self.__jogador_DAO.get_all()
     
     def adicionar_user(self, jogador):
-        self.__jogadores.append(jogador)
+        #self.__jogadores.append(jogador)
+        self.__jogador_DAO.add(jogador)
 
     def perfil(self):
         self.__tela_jogador.alterar_perfil()
@@ -32,7 +36,7 @@ class JogadorController(UsuarioController): #TEM QUE TIRAR O SELF DO CONTROLADOR
                 jogo_desejado.adicionar_jogador(jogador_objeto)
                 self.iniciar_tela()
             else:
-                return "Idade minima insuficiente"
+                return "Idade mínima insuficiente"
 
         else:
             return "Sua biografia precisa de mais de 10 caracteres para poder adquirir um jogo"
@@ -43,21 +47,17 @@ class JogadorController(UsuarioController): #TEM QUE TIRAR O SELF DO CONTROLADOR
         self.__tela_jogador.mostrar_jogos(jogos)
     
     def iniciar_tela(self):
-        while True: 
-            acoes = {
-                1: self.comprar_jogo,
-                2: self.biblioteca_do_jogador,
-                3: self.abrir_tela_de_perfil,
-                4: self.sair,
-                5: self.__controlador_sistema.tela_inicial
-            }
-            
-            opcao = self.__tela_jogador.tela_opcoes()
-            funcao = acoes[opcao]
-            resposta = funcao()
-            
-            if isinstance(resposta,str):
-                self.__tela_jogador.msg(resposta)  # Executa a função correspondente à opção escolhida
-            
-            if opcao == 4:  # Número correspondente à opção de sair
-                break  # Encerra o loop para sair do menu
+        window = self.__tela_jogador.configurar_tela()
+        self.__controlador_sistema.adicionar_tela(window) #Adiciona a tela no histórico de telas
+        info_tela = self.__tela_jogador.rodar(window)
+        evento = info_tela["event"]
+
+        if evento== "voltar":
+            tela_anterior = self.__controlador_sistema.voltar_telas()
+            #tela_anterior = self.__tela_jogador.voltar_tela()
+            print("Tela anterior:", tela_anterior)
+            self.__tela_jogador.abrir_tela(tela_anterior)
+        if evento=="Comprar":
+            pass
+        elif evento=="Lista de jogos":
+            self.__tela_jogador.configurar_get(self.biblioteca_do_dev())

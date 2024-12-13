@@ -1,60 +1,46 @@
 from datetime import datetime
-from .tela_abstrata import AbstractTela
-class TelaCadastro(AbstractTela):
+from .tela_abstrata import AbstractView
+import PySimpleGUI as sg
+class TelaCadastro(AbstractView):
+
     def __init__(self) -> None:
         super().__init__()
-    def confirma_senha(self):
-        confirmaSenha = None
-        print("Digite sua senha")
-        senha = input()
-        print("Confirme sua senha")
-        while True:
-            confirmaSenha = input()
-            if senha!= confirmaSenha:
-                print("A senhas não coincidem. Digite novamente")
-            else:
-                return senha
     
-    def cadastroGeral(self, tipo_de_conta, saudaçao):
-        print(f"--- Criando sua conta de {saudaçao} ---")
-        print("Digite seu nome de usuário")
-        login = input()
-        senha = self.confirma_senha()
-        print("Digite seu email")
-        email = input()
-        print("Deseja criar sua biografia agora [S/N]?")
-        biografia = input()
-        if biografia=="S": #arrumar isso aqui para tratamento de exceções
-            print("Digite sua biografia")
-            biografia = input()
-        
-        usuario_info = tipo_de_conta(login, senha, biografia, email)
-        return usuario_info
+    def configurar_tela(self):
+        layout = [
+            [sg.Text("Digite seu nome de usuario"),sg.InputText("", key="nome_de_usuario")],
+            [sg.Text("Digite sua senha"),sg.InputText("", key="senha_1", password_char="*")],
+            [sg.Text("Confirme sua senha"),sg.InputText("", key="senha_2", password_char="*")],
+            [sg.Text("Monte sua biografia"),sg.InputText("", key="biografia")],
+            [sg.Text("", size=(40, 1), text_color="red", key="-MENSAGEM-")],
+        ]
 
-    def cadastrarDev(self, login, senha, biografia, email):
-        print("Você concorda com os termos [S/N] ?")
-        termos = input().upper()
-        # if termos == "N":
-        #     print("Você não concordou com os termos, portan   to a conta não vai ser criada")
-        #     return False
-        print("Deseja criar sua biografia agora [S/N]?")
-        usuario_info = {"tipo_de_conta":"desenvolvedor","nome_de_usuario":login, "biografia":biografia, "email":email, "termos":termos, "senha":senha}
-        return usuario_info
+        return layout
 
+    def configurar_tela_jogador(self, layout):
+        layout.append([sg.Text("Qual seu gênero"),sg.InputText("", key="genero")])
+        layout.append([sg.Text("Qual seu ano de nascimento"),sg.InputText("", key="idade")])
+        layout.append([sg.Button("OK")])
 
-    def cadastrarJogador(self, login, senha, biografia, email):
-        ano_atual = datetime.now().year
-        print("Qual seu Gênero? [M/F/OUTRO]")
-        genero = input()
-        print("Em que ano você nasceu ?")
-        ano_nascido = int(input())
-        idade = ano_atual - ano_nascido
-        usuario_info = {"tipo_de_conta":"jogador","nome_de_usuario":login, "senha":senha,"genero":genero,"idade":idade,  "biografia":biografia}
-        return usuario_info
+        window = sg.Window('Cadastro de jogador', layout, finalize=True)
+        return window
 
-    def tipo_de_cadastro(self):
-        tipos_de_usuario = {1:self.cadastrarJogador, 2:self.cadastrarDev}
-        saudacao_usuario = {1:"Jogador", 2:"Desenvolvedor"}
-        print("Você quer criar uma conta de JOGADOR[1] ou DESENVOLVEDOR[2]")
-        tipo_escolhido = self.le_num_inteiro("Escolha uma opcao", [1,2])
-        return tipos_de_usuario[tipo_escolhido], saudacao_usuario[tipo_escolhido]
+    def configurar_tela_desenvolvedor(self, layout):
+        layout.append([sg.Text("Qual seu Email"),sg.InputText("", key="email")])
+        layout.append([sg.Radio("Li e concordo com os termos", "termos", key="termos", default=True), sg.Radio("Não li os termos", "termos", key="termos")])
+        layout.append([sg.Button("OK")])
+
+        window = sg.Window('Cadastro Desenvolvedor', layout, finalize=True)
+        return window
+
+    def rodar(self, tipo_de_conta, mensagem=None):
+        opcoes_de_tela = {
+            "desenvolvedor":self.configurar_tela_desenvolvedor,
+            "jogador":self.configurar_tela_jogador
+        }
+        layout = self.configurar_tela()
+        tela_que_vai_abrir = opcoes_de_tela[tipo_de_conta]
+        window = tela_que_vai_abrir(layout)
+        event, values = self.abrir_tela(window, "password", mensagem)
+        return (event, values)
+

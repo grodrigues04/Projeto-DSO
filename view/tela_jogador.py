@@ -1,29 +1,37 @@
-from .tela_abstrata import AbstractTela
-
-class TelaJogador(AbstractTela):
+from .tela_abstrata import AbstractView
+import PySimpleGUI as sg
+class TelaJogador(AbstractView):
     def __init__(self) -> None:
         super().__init__()
 
 
+    
     def alterar_perfil(self):
         print()
 
     def msg(self,msg):
         print(msg)
         
-    def tela_opcoes(self):
-        print()
-        print("--- JOGADOR ---")
-        print("1 - Comprar jogo")
-        print("2 - Ver sua lista de Jogos")
-        print("3 - Editar Perfil")
-        print("4 - Sair")
-        print("5 - Tela inicial")
-        print()
-        #opcao = self.le_num_inteiro("Escolha a opcao: ", [1,2,3,4,0])
-        opcao = self.le_num_inteiro("Escolha uma opcao",[1,2,3,4,5])
-        return opcao
+    def configurar_tela(self):
+        layout = [
+            [sg.Text('--- JOGADOR ---', font=("Helvetica", 16), justification='center')],
+            [sg.Button('Comprar Jogo', size=(25, 1))],
+            [sg.Button('Ver minha lista de Jogos', size=(25, 1))],
+            [sg.Button('Editar Perfil', size=(25, 1))],
+            [sg.Button('Sair', size=(25, 1))],
+            [sg.Button('Tela Inicial', size=(25, 1))]
+        ]
+
+        window = sg.Window('Tela jogador', layout, finalize=True)
+        return window
     
+    def rodar(self, window):
+        window = self.configurar_tela()
+        event, values = self.abrir_tela(window)
+        return {"event":event, "values":values}
+
+
+
     def mostrar_jogos(self, jogos):
         print()
         if len(jogos) > 0:
