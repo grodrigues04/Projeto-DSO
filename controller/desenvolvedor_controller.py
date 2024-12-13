@@ -2,7 +2,7 @@
 from view.tela_dev import TelaDesenvolvedor
 from .usuario_controller import UsuarioController
 from DAOs.desenvolvedor_DAO import DesenvolvedorDAO
-
+from exceptions.preencher_campos import CamposVaziosException
 class DesenvolvedorController(UsuarioController):
     def __init__(self, controlador_sistema) -> None:
         super().__init__(controlador_sistema)
@@ -38,7 +38,17 @@ class DesenvolvedorController(UsuarioController):
 
     def criar_jogo(self):
         jogo_controler = self.__controlador_sistema.jogo_controler
-        jogo_controler.tela_de_criacao()
+
+        try:
+            jogo_tela = jogo_controler.rodar() #Jogo precisa de argumento para saber a ação
+            jogo_info = jogo_tela["values"]
+            for chave in jogo_info:
+                if jogo_info[chave] != "" or isinstance(jogo_info[chave], bool):
+                    pass
+                else:
+                    raise CamposVaziosException()
+        except CamposVaziosException as e:
+                    self.__tela_dev.exibir_mensagem(str(e))
 
     def iniciar_tela(self):
         window = self.__tela_dev.configurar_tela()

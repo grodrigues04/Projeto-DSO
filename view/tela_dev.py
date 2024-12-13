@@ -14,7 +14,7 @@ class TelaDesenvolvedor(AbstractView):
             [sg.Button("Encerrar Sistema", size=(25, 1))],
             [sg.Button("voltar", size=(25, 1))],
         ]
-        window = sg.Window('Cadastro de jogador', layout, finalize=True)
+        window = sg.Window('Tela dev', layout, finalize=True)
         return window
     
     def rodar(self, window):

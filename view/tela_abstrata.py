@@ -63,7 +63,7 @@ class AbstractView(ABC):
         #     print("Telas atuais:", self.__pilha_telas)
         
         lista_de_eventos = ["ok","Criar jogo","Lista de jogos desenvolvidos","Editar Perfil",
-                             "Encerrar Sistema","Tela inicial", "voltar" ]
+                             "Encerrar Sistema","Tela inicial", "voltar", "Lista de jogos", "Comprar"]
         
         while True:
             if mensagem:
