@@ -3,6 +3,7 @@ from model.desenvolvedor import Desenvolvedor
 from view.tela_cadastro import TelaCadastro
 from exceptions.valor_int import IntException
 from exceptions.preencher_campos import CamposVaziosException
+from exceptions.usuario_repetido import UsuarioRepetido
 class ControllerCadastro:
     def __init__(self, controlador_sistema) -> None:
         self.__tela_cadastro = TelaCadastro()
@@ -16,9 +17,10 @@ class ControllerCadastro:
         while True:
             usuario_info = self.abre_tela_cadastro(tipo_de_conta)
             print("AQUI O USUARIO INFO", usuario_info)
-
-            if self.verifica_usuario_existe(tipo_de_conta, usuario_info["nome_de_usuario"]):
-                self.__tela_cadastro.rodar(tipo_de_conta, "Erro: Nome de usuário já existe!")
+            try:
+                self.verifica_usuario_existe(tipo_de_conta, usuario_info["nome_de_usuario"])
+            except UsuarioRepetido as e:
+                self.__tela_cadastro.exibir_mensagem(str(e))
             else:
                 try:
                     novo_usuario = self.criar_usuario(usuario_info, tipo_de_conta)
@@ -32,17 +34,23 @@ class ControllerCadastro:
     def verifica_usuario_existe(self, tipo_de_conta, nome_de_usuario):
         if tipo_de_conta == "jogador":
             lista_jogadores = self.__controlador_sistema.jogador_controler.users
-            return any(jogador.nome_de_usuario == nome_de_usuario for jogador in lista_jogadores)
+            if any(jogador.nome_de_usuario == nome_de_usuario for jogador in lista_jogadores):
+                raise UsuarioRepetido()
         elif tipo_de_conta == "desenvolvedor":
             lista_devs = self.__controlador_sistema.desenvolvedor_controler.users
-            return any(dev.nome_de_usuario == nome_de_usuario for dev in lista_devs)
+            if any(dev.nome_de_usuario == nome_de_usuario for dev in lista_devs):
+                raise UsuarioRepetido()
         return False
+
 
     def criar_usuario(self, usuario_info, tipo_de_conta):
         usuario_info["tipo_de_conta"] = tipo_de_conta
-        if any(not value.strip() for value in usuario_info.values()):
-            print("EU LEVANTEI A EXECASOFDKAS")
-            raise CamposVaziosException()
+       # if any((not value.strip() if isinstance(value, str) else not value) for value in usuario_info.values()):
+        for chave in usuario_info:
+            if usuario_info[chave] != "" or isinstance(usuario_info[chave], bool):
+                pass
+            else:
+                raise CamposVaziosException()
         
         if tipo_de_conta == "desenvolvedor":
             novo_dev = Desenvolvedor(
