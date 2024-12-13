@@ -31,7 +31,10 @@ class ControllerLogin():
         conta = {"desenvolvedor":1, "jogador":2}
         
         while True: 
-            usuario_credenciais = self.__tela_login.rodar(tipo_de_conta)
+            #usuario_credenciais = self.__tela_login.rodar(tipo_de_conta)
+            window = self.__tela_login.configurar_tela(tipo_de_conta)
+            self.__controlador_sistema.adicionar_tela(window)
+            usuario_credenciais = self.__tela_login.rodar(window,tipo_de_conta)
             usuario_credenciais = {
                 "nome_de_usuario":usuario_credenciais["values"][0],
                 "senha":usuario_credenciais["values"][1],

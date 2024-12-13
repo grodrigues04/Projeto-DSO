@@ -41,11 +41,14 @@ class DesenvolvedorController(UsuarioController):
         jogo_controler.tela_de_criacao()
 
     def iniciar_tela(self):
-        info_tela = self.__tela_dev.rodar()
+        window = self.__tela_dev.configurar_tela()
+        self.__controlador_sistema.adicionar_tela(window) #Adiciona a tela no histórico de telas
+        info_tela = self.__tela_dev.rodar(window)
         evento = info_tela["event"]
 
         if evento== "voltar":
-            tela_anterior = self.__tela_dev.voltar_tela()
+            tela_anterior = self.__controlador_sistema.voltar_telas()
+            #tela_anterior = self.__tela_dev.voltar_tela()
             print("Tela anterior:", tela_anterior)
             self.__tela_dev.abrir_tela(tela_anterior)
         if evento=="Criar jogo":

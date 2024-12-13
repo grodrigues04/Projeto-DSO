@@ -9,6 +9,10 @@ class AbstractView(ABC):
     def __init__(self):
         self.__pilha_telas = []
 
+    def fechar_tela(self, window):
+        if window:
+            window.close()
+
     @property
     def ultima_tela(self):
         return self.__ultima_tela
@@ -40,23 +44,23 @@ class AbstractView(ABC):
     def configurar_tela():
         pass
 
-    def voltar_tela(self):   
-        print("TELAS:", self.__pilha_telas)
-        if len(self.__pilha_telas) > 1:
-            print("To caindo nesse")
-            self.__pilha_telas.pop()  # Remove a tela atual
-            return self.__pilha_telas[-1]  # Retorna a penúltima tela
-        elif len(self.__pilha_telas) == 1:
-            print("To caindo nesse if da funcao ?")
-            return self.__pilha_telas[-1]  # Se for a única tela, retorna ela mesma
-        return None  # Não há telas para voltar
-    #Fica responsável por abrir as telas
+    # def voltar_tela(self):   
+    #     print("TELAS:", self.__pilha_telas)
+    #     if len(self.__pilha_telas) > 1:
+    #         print("To caindo nesse")
+    #         self.__pilha_telas.pop()  # Remove a tela atual
+    #         return self.__pilha_telas[-1]  # Retorna a penúltima tela
+    #     elif len(self.__pilha_telas) == 1:
+    #         print("To caindo nesse if da funcao ?")
+    #         return self.__pilha_telas[-1]  # Se for a única tela, retorna ela mesma
+    #     return None  # Não há telas para voltar
+    # #Fica responsável por abrir as telas
     
     def abrir_tela(self, window=None, condicao_especial=None, mensagem=None):
-        if len(self.__pilha_telas) == 0 or self.__pilha_telas[-1] != window:
-            print("Adicionei uma tela...")
-            self.__pilha_telas.append(window)  # Adiciona uma tela apenas se for nova
-            print("Telas atuais:", self.__pilha_telas)
+        # if len(self.__pilha_telas) == 0 or self.__pilha_telas[-1] != window:
+        #     print("Adicionei uma tela...")
+        #     self.__pilha_telas.append(window)  # Adiciona uma tela apenas se for nova
+        #     print("Telas atuais:", self.__pilha_telas)
         
         lista_de_eventos = ["ok","Criar jogo","Lista de jogos desenvolvidos","Editar Perfil",
                              "Encerrar Sistema","Tela inicial", "voltar" ]

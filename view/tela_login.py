@@ -23,22 +23,7 @@ class TelaLogin(AbstractView):
         window = sg.Window('Tela de Login', layout)
         return window
     
-    def rodar(self, tipo_de_conta):
+    def rodar(self, window, tipo_de_conta):
         window = self.configurar_tela(tipo_de_conta)
         event, values = self.abrir_tela(window)
         return {"event":event, "values":values}
-    # def forms_login(self):
-
-    #     print()
-    #     print(" --- STEAM DOIS ---")
-    #     print("Em qual conta você você quer entrar? [DESENVOLVEDOR(1)|JOGADOR(2)]")
-    #     while True:
-    #         tipo_de_conta = self.le_num_inteiro("Escolha uma opcao", [1,2,3])
-    #         print("Digite seu nome de usuario")
-    #         nome_de_usuario = input()
-    #         print("Digite sua senha")
-    #         senha = input()
-    #         print()
-    #         return {"tipo_de_conta":tipo_de_conta,
-    #                 "nome_de_usuario":nome_de_usuario,
-    #                 "senha":senha}

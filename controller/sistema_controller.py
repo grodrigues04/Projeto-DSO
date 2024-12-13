@@ -29,6 +29,26 @@ class ControladorSistema():
     def jogo_controler(self):
         return self.__jogo_controller
 
+    def adicionar_tela(self, window):
+        if len(self.__pilha_telas) == 0 or self.__pilha_telas[-1] != window:
+            print("Adicionei uma tela...")
+            self.__pilha_telas.append(window)  # Adiciona uma tela apenas se for nova
+            print("Telas atuais:", self.__pilha_telas)
+        self.__pilha_telas
+
+    def voltar_telas(self):
+        print("TELAS:", self.__pilha_telas)
+        if len(self.__pilha_telas) > 1:
+            print("To caindo nesse")
+            ultima_tela = self.__pilha_telas.pop()  # Remove a tela atual
+            self.__tela_sistema.fechar_tela(ultima_tela)
+            return self.__pilha_telas[-1]  # Retorna a penúltima tela
+        elif len(self.__pilha_telas) == 1:
+            print("To caindo nesse if da funcao ?")
+            return self.__pilha_telas[-1]  # Se for a única tela, retorna ela mesma
+        return None  # Não há telas para voltar
+    #Fica responsável por abrir as telas  
+
     #def abre_tela_inicial(self):
     def realizar_login(self, tipo_de_conta):
         tipo_de_conta = self.__login_controller.iniciar_login(tipo_de_conta)

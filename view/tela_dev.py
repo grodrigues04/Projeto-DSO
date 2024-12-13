@@ -4,6 +4,7 @@ import PySimpleGUI as sg
 class TelaDesenvolvedor(AbstractView):
     def __init__(self) -> None:
         super().__init__()
+
     def configurar_tela(self): #Arrumar dps
         layout = [
             [sg.Text("--- DESENVOLVEDOR ---", font=("Helvetica", 16), justification="center")],
@@ -16,7 +17,7 @@ class TelaDesenvolvedor(AbstractView):
         window = sg.Window('Cadastro de jogador', layout, finalize=True)
         return window
     
-    def rodar(self):
+    def rodar(self, window):
         window = self.configurar_tela()
         #self.__ultima_tela = window
         event, values = self.abrir_tela(window)

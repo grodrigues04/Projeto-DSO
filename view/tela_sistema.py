@@ -8,7 +8,7 @@ class TelaSistemaInicial(AbstractView):
     def configurar_tela(self):
         layout = [  
             [sg.Text("Tela inicial")], 
-            [sg.Radio("Realizar login", "entrar", key=1), sg.Radio("Realizar Cadastro", "cadastro", key=2)],
+            [sg.Radio("Realizar login", "entrar", key=1), sg.Radio("Realizar Cadastro", "entrar", key=2)],
             [sg.Text("Qual o tipo da conta?")], 
             [sg.Radio('Desenvolvedor',"conta", key="desenvolvedor"), sg.Radio('Jogador', "conta", key="jogador")],
             [sg.Button("ok")]
