@@ -7,12 +7,12 @@ class JogadorDAO(DAO):
         super().__init__('jogador.pkl')
 
     def add(self, jogador: Jogador):
-        if((jogador is not None) and isinstance(jogador, Jogador) and isinstance(jogador.nome, int)):
-            super().add(jogador.nome, jogador)
+        if(jogador is not None) and isinstance(jogador, Jogador):
+            super().add(jogador.nome_de_usuario, jogador)
 
     def update(self, jogador: Jogador):
-        if((jogador is not None) and isinstance(jogador, Jogador) and isinstance(jogador.nome, int)):
-            super().update(jogador.nome, Jogador)
+        if((jogador is not None) and isinstance(jogador, Jogador)):
+            super().update(jogador.nome_de_usuario, Jogador)
 
     def get(self, key:int):
         if isinstance(key, int):
